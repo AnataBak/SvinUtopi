@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свинная Утопия — Элитная Свиноферма Будущего</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        :root {
+            --pink-light: #FFF0F3;
+            --pink-mid: #FFB6C1;
+            --pink-deep: #E8909C;
+            --pink-dark: #C25B6A;
+            --warm-bg: #FDF6F0;
+            --warm-gold: #D4A574;
+            --warm-brown: #8B6347;
+            --text-dark: #2D1F14;
+            --text-light: #6B5344;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background: var(--warm-bg);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(253, 246, 240, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(253, 246, 240, 0.95);
+            box-shadow: 0 4px 30px rgba(139, 99, 71, 0.1);
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .nav-logo-icon {
+            font-size: 2rem;
+            animation: pigBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes pigBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(-5deg); }
+            75% { transform: translateY(-3px) rotate(5deg); }
+        }
+
+        .nav-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--pink-dark), var(--warm-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--pink-dark), var(--warm-gold));
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover { color: var(--pink-dark); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 2.5px;
+            background: var(--text-dark);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .burger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .burger.active span:nth-child(2) { opacity: 0; }
+        .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(160deg, var(--warm-bg) 0%, var(--pink-light) 50%, #FFE4E9 100%);
+        }
+
+        .hero-bg-shapes {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: floatShape 8s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 300px; height: 300px;
+            background: var(--pink-mid);
+            top: 10%; left: -5%;
+            animation-delay: 0s;
+        }
+        .floating-shape:nth-child(2) {
+            width: 200px; height: 200px;
+            background: var(--warm-gold);
+            top: 60%; right: -3%;
+            animation-delay: -3s;
+        }
+        .floating-shape:nth-child(3) {
+            width: 150px; height: 150px;
+            background: var(--pink-deep);
+            bottom: 10%; left: 20%;
+            animation-delay: -5s;
+        }
+        .floating-shape:nth-child(4) {
+            width: 100px; height: 100px;
+            background: var(--warm-gold);
+            top: 20%; right: 20%;
+            animation-delay: -2s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .hero-content {
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 182, 193, 0.3);
+            border: 1px solid rgba(194, 91, 106, 0.2);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--pink-dark);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A, var(--warm-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px rgba(194, 91, 106, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(194, 91, 106, 0.45);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid rgba(139, 99, 71, 0.3);
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--pink-dark);
+            color: var(--pink-dark);
+            transform: translateY(-3px);
+            background: rgba(255, 182, 193, 0.1);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--pink-dark);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--pink-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, var(--pink-light), #FFE4E9, var(--pink-mid));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: 0 20px 60px rgba(194, 91, 106, 0.15);
+        }
+
+        .about-image::after {
+            content: '🏆';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 3rem;
+            animation: pigBounce 3s ease-in-out infinite;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--pink-light);
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+
+        .about-feature:hover {
+            transform: translateX(5px);
+        }
+
+        /* ===== PRODUCTS ===== */
+        .products {
+            background: linear-gradient(180deg, var(--warm-bg), white);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(212, 165, 116, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(194, 91, 106, 0.15);
+        }
+
+        .product-card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 5;
+        }
+
+        .product-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            background: linear-gradient(135deg, var(--pink-light), #FFE8ED);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.02);
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255,182,193,0.4), transparent 60%);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--pink-dark);
+        }
+
+        .product-price small {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .product-btn {
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .product-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(194, 91, 106, 0.4);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            background: linear-gradient(135deg, #2D1F14, #4A332A);
+            color: white;
+        }
+
+        .testimonials .section-tag { color: var(--warm-gold); }
+        .testimonials .section-desc { color: rgba(255,255,255,0.6); }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-stars {
+            color: #FFD700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .testimonial-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-dark), var(--warm-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info-card {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--pink-light);
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .contact-info-card:hover {
+            transform: translateX(8px);
+            background: #FFE4E9;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-info-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .contact-form {
+            background: var(--warm-bg);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid rgba(212, 165, 116, 0.2);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            background: white;
+            color: var(--text-dark);
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--pink-dark);
+            box-shadow: 0 0 0 4px rgba(194, 91, 106, 0.1);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 100px; }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(194, 91, 106, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--text-dark);
+            color: rgba(255,255,255,0.6);
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .footer-social {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-social:hover {
+            background: var(--pink-dark);
+            transform: translateY(-3px);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== MOBILE NAV ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(253, 246, 240, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .mobile-menu.active { display: flex; }
+
+        .mobile-menu a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:hover { color: var(--pink-dark); }
+
+        .mobile-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* pig walking animation on scroll */
+        .pig-marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 1.5rem 0;
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .pig-marquee-inner {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .burger { display: flex; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .products-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-features { grid-template-columns: 1fr; }
+
+            .hero-stats {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+
+            .section { padding: 4rem 1.25rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .footer-inner { flex-direction: column; text-align: center; }
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(194, 91, 106, 0.4);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <span class="nav-logo-icon">🐷</span>
+                <span class="nav-logo-text">Свинная Утопия</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#hero">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#products">Ассортимент</a></li>
+                <li><a href="#reviews">Отзывы</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+            <button class="burger" id="burger" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" id="mobileClose">✕</button>
+        <a href="#hero" class="mobile-link">Главная</a>
+        <a href="#about" class="mobile-link">О нас</a>
+        <a href="#products" class="mobile-link">Ассортимент</a>
+        <a href="#reviews" class="mobile-link">Отзывы</a>
+        <a href="#contact" class="mobile-link">Контакты</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-shapes">
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                🏅 Лучшая свиноферма антивселенной 2025
+            </div>
+            <h1>
+                Добро пожаловать в<br>
+                <span class="highlight">Свинную Утопию</span>
+            </h1>
+            <p class="hero-subtitle">
+                Элитные свиньи ручной сборки. Генно-модифицированные гибриды мечты.
+                Мы скрещиваем свиней с чем угодно — и вам это понравится.
+            </p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn-primary">🐽 Выбрать свинью</a>
+                <a href="#about" class="btn-secondary">Наша история</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="stat1">0</div>
+                    <div class="stat-label">Свиней продано</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="stat2">0</div>
+                    <div class="stat-label">Видов гибридов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Довольных хрюшек</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="pig-marquee">
+        <div class="pig-marquee-inner">
+            🐷 Свинная роскошь &nbsp;&nbsp;✨&nbsp;&nbsp; Премиум хрюканье &nbsp;&nbsp;🐽&nbsp;&nbsp; Генетика будущего &nbsp;&nbsp;🌟&nbsp;&nbsp; Свинная элита &nbsp;&nbsp;🏆&nbsp;&nbsp; Хрю-кутюр &nbsp;&nbsp;💎&nbsp;&nbsp; Свинный люкс &nbsp;&nbsp;🐷&nbsp;&nbsp;
+            🐷 Свинная роскошь &nbsp;&nbsp;✨&nbsp;&nbsp; Премиум хрюканье &nbsp;&nbsp;🐽&nbsp;&nbsp; Генетика будущего &nbsp;&nbsp;🌟&nbsp;&nbsp; Свинная элита &nbsp;&nbsp;🏆&nbsp;&nbsp; Хрю-кутюр &nbsp;&nbsp;💎&nbsp;&nbsp; Свинный люкс &nbsp;&nbsp;🐷&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="section about" id="about">
+        <div class="section-inner">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    🐖
+                </div>
+                <div class="about-text reveal">
+                    <div class="section-tag">Наша история</div>
+                    <h3>Мы начали с одной свиньи и сломанной мечты</h3>
+                    <p>
+                        В далёком 2003 году наш основатель, Пётр Хрюнов, случайно скрестил домашнюю свинью с офисным принтером. Результат поразил мир — свинья начала печатать документы и хрюкать в формате PDF.
+                    </p>
+                    <p>
+                        С тех пор мы посвятили жизнь созданию самых нелепых, бесполезных и невероятно очаровательных гибридов свиней. Наша лаборатория работает 25 часов в сутки (мы добавили лишний час для хрюканья).
+                    </p>
+                    <p>
+                        Сегодня «Свинная Утопия» — это международная корпорация с офисами в 0 странах и штатом из 347 свиней-сотрудников, которые получают зарплату желудями.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">🧬 Свинная генетика</div>
+                        <div class="about-feature">🎓 Свинное образование</div>
+                        <div class="about-feature">🏗️ Свинная архитектура</div>
+                        <div class="about-feature">💆 Свинное спа</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section products" id="products">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="section-tag">Ассортимент</div>
+                <h2 class="section-title">Наши фирменные свиньи</h2>
+                <p class="section-desc">
+                    Каждая свинья — произведение искусства. Скрещённая с любовью и лёгким безумием.
+                </p>
+            </div>
+            <div class="products-grid">
+
+                <!-- Product 1 -->
+                <div class="product-card reveal">
+                    <div class="product-card-badge">ХИТ</div>
+                    <div class="product-image">🐷🚜</div>
+                    <div class="product-info">
+                        <div class="product-name">Свинобульдозер™</div>
+                        <p class="product-desc">
+                            Могучий гибрид свиньи и бульдозера. Роет грядки пятачком со скоростью 40 км/ч. Обладает свинным турбонаддувом и хрюкает дизелем. Идеален для свинного строительства.
+                        </p>
+                        <div class="product-footer">
+                            <div class="product-price">₽849 000 <small>/шт</small></div>
+                            <button class="product-btn" onclick="addToCart('Свинобульдозер')">В хлев 🛒</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card reveal">
+                    <div class="product-card-badge">NEW</div>
+                    <div class="product-image">🐷🪑</div>
+                    <div class="product-info">
+                        <div class="product-name">Свинный стол «Хрю-комфорт»</div>
+                        <p class="product-desc">
+                            Стол, который хрюкает, когда на него ставят горячее без подставки. Имеет четыре копытца вместо ножек и свинное лакированное покрытие. Выдерживает до 200 кг желудей.
+                        </p>
+                        <div class="product-footer">
+                            <div class="product-price">₽124 500 <small>/шт</small></div>
+                            <button class="product-btn" onclick="addToCart('Свинный стол')">В хлев 🛒</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card reveal">
+                    <div class="product-card-badge">VIP</div>
+                    <div class="product-image">🐷☁️</div>
+                    <div class="product-info">
+                        <div class="product-name">Свинное облако</div>
+                        <p class="product-desc">
+                            Летающая свинья-облако для свинного прогноза погоды. Парит над вашим домом и хрюкает перед дождём. Работает на свинном конденсате. Розовые осадки — бонус.
+                        </p>
+                        <div class="product-footer">
+                            <div class="product-price">₽2 100 000 <small>/шт</small></div>
+                            <button class="product-btn" onclick="addToCart('Свинное облако')">В хлев 🛒</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card reveal">
+                    <div class="product-image">🐷🎸</div>
+                    <div class="product-info">
+                        <div class="product-name">Свинная гитара «Пятачок Страдивари»</div>
+                        <p class="product-desc">
+                            Музыкальный инструмент с корпусом из свинного бархата. Издаёт исключительно хрюкающие аккорды. Каждая нота — как свинное серебро для ушей. Рекомендовано свинными критиками.
+                        </p>
+                        <div class="product-footer">
+                            <div class="product-price">₽567 000 <small>/шт</small></div>
+                            <button class="product-btn" onclick="addToCart('Свинная гитара')">В хлев 🛒</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card reveal">
+                    <div class="product-card-badge">🔥 АКЦИЯ</div>
+                    <div class="product-image">🐷🔬</div>
+                    <div class="product-info">
+                        <div class="product-name">Свинный микроскоп</div>
+                        <p class="product-desc">
+                            Позволяет увидеть свинную ДНК во всей красе. Линзы сделаны из отполированных пятачков, корпус — свинное титановое покрытие. Увеличение: х1000 хрю-единиц.
+                        </p>
+                        <div class="product-footer">
+                            <div class="product-price">₽345 900 <small>/шт</small></div>
+                            <button class="product-btn" onclick="addToCart('Свинный микроскоп')">В хлев 🛒</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card reveal">
+                    <div class="product-card-badge">ЛЮКС</div>
+                    <div class="product-image">🐷👑</div>
+                    <div class="product-info">
+                        <div class="product-name">Свинный трон «Корона Хрюма»</div>
+                        <p class="product-desc">
+                            Королевский трон обитый свинным шёлком, с подлокотниками в форме копыт. Встроенная система свинного массажа и автоматическая подача желудей. Свинная аристократия одобряет.
+                        </p>
+                        <div class="product-footer">
+                            <div class="product-price">₽4 200 000 <small>/шт</small></div>
+                            <button class="product-btn" onclick="addToCart('Свинный трон')">В хлев 🛒</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section testimonials" id="reviews">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="section-tag">Отзывы</div>
+                <h2 class="section-title" style="color:white;">Что говорят наши клиенты</h2>
+                <p class="section-desc">
+                    Реальные отзывы реальных людей (и нескольких свиней)
+                </p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        «Купил Свинобульдозер для дачи. Теперь соседи молча смотрят, как розовый гибрид перепахивает мой участок за 8 минут. Свинное восхищение в их глазах бесценно.»
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👨‍🌾</div>
+                        <div>
+                            <div class="testimonial-name">Геннадий Картошкин</div>
+                            <div class="testimonial-role">Дачник-энтузиаст</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        «Свинное облако — это лучшее, что случилось с нашим посёлком. Теперь мы знаем о дожде за 3 дня. Правда, оно иногда хрюкает в 3 часа ночи, но мы привыкли.»
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👩‍💼</div>
+                        <div>
+                            <div class="testimonial-name">Маргарита Хрюнова</div>
+                            <div class="testimonial-role">Метеоролог на пенсии</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        «Хрю. Хрю хрю хрю. Хрю-хрю! Хрюююю. 🐽»
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">🐷</div>
+                        <div>
+                            <div class="testimonial-name">Борис (свинья)</div>
+                            <div class="testimonial-role">Главный тестировщик</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contact">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="section-tag">Контакты</div>
+                <h2 class="section-title">Свяжитесь с нами</h2>
+                <p class="section-desc">
+                    Мы всегда рады новым клиентам (и новым свиньям)
+                </p>
+            </div>
+            <div class="contact-grid">
+                <div class="reveal">
+                    <div class="contact-info-card">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <div class="contact-info-title">Свинное расположение</div>
+                            <div class="contact-info-text">
+                                г. Хрюнбург, ул. Пятачковая, д. 42, стр. ХРЮ<br>
+                                (третий хлев направо после свинного фонтана)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-icon">🕐</div>
+                        <div>
+                            <div class="contact-info-title">Свинные часы работы</div>
+                            <div class="contact-info-text">
+                                Пн-Пт: 8:00 — 20:00 (по хрюнбургскому времени)<br>
+                                Сб: 10:00 — 18:00 (свинный уикенд)<br>
+                                Вс: Свиньи отдыхают. И мы с ними.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <div class="contact-info-title">Свинная линия</div>
+                            <div class="contact-info-text">
+                                +7 (999) ХРЮ-ХРЮ-ХРЮ<br>
+                                hru@svinnaya-utopia.oink
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-icon">🚗</div>
+                        <div>
+                            <div class="contact-info-title">Как добраться</div>
+                            <div class="contact-info-text">
+                                Метро «Свинная площадь», выход к копытам.<br>
+                                Автобус №ХРЮ, остановка «Свинное величие».
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form reveal">
+                    <h3 style="font-size:1.4rem; margin-bottom:1.5rem;">Заказать свинью мечты</h3>
+                    <div class="form-group">
+                        <label>Ваше имя (или кличка)</label>
+                        <input type="text" placeholder="Например: Барон фон Хрюнштейн" id="formName">
+                    </div>
+                    <div class="form-group">
+                        <label>Свинная почта</label>
+                        <input type="email" placeholder="hru@example.oink" id="formEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>Какую свинью желаете?</label>
+                        <select id="formPig">
+                            <option value="">Выберите свинью...</option>
+                            <option value="bulldozer">🚜 Свинобульдозер™</option>
+                            <option value="table">🪑 Свинный стол «Хрю-комфорт»</option>
+                            <option value="cloud">☁️ Свинное облако</option>
+                            <option value="guitar">🎸 Свинная гитара</option>
+                            <option value="microscope">🔬 Свинный микроскоп</option>
+                            <option value="throne">👑 Свинный трон</option>
+                            <option value="custom">🧬 Хочу кастомную свинью!</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Дополнительные хрюканья</label>
+                        <textarea placeholder="Расскажите, зачем вам свинья и какой уровень хрюканья предпочитаете..." id="formMessage"></textarea>
+                    </div>
+                    <button class="form-submit" onclick="submitForm()">
+                        🐽 Отправить свинное послание
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">🐷 Свинная Утопия</div>
+            <div class="footer-text">
+                © 2025 Свинная Утопия. Все хрюканья защищены.<br>
+                Ни одна свинья не пострадала при создании этого сайта. Наверное.
+            </div>
+            <div class="footer-socials">
+                <div class="footer-social" title="СвинстаГрам">📸</div>
+                <div class="footer-social" title="ХрюТуб">🎬</div>
+                <div class="footer-social" title="Свиттер">💬</div>
+                <div class="footer-social" title="ТикХрюк">🎵</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // === NAVBAR SCROLL ===
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // === BURGER MENU ===
+        const burger = document.getElementById('burger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileClose = document.getElementById('mobileClose');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        mobileClose.addEventListener('click', () => {
+            burger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // === SCROLL REVEAL ===
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // === COUNTER ANIMATION ===
+        function animateCounter(id, target, duration = 2000) {
+            const el = document.getElementById(id);
+            const start = 0;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(eased * target);
+
+                el.textContent = current.toLocaleString('ru-RU');
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    el.textContent = target.toLocaleString('ru-RU') + '+';
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('stat1', 12847, 2500);
+                    animateCounter('stat2', 256, 2000);
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        heroObserver.observe(document.querySelector('.hero-stats'));
+
+        // === TOAST ===
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // === ADD TO CART ===
+        function addToCart(product) {
+            showToast(`🐷 "${product}" добавлен в хлев! Хрю!`);
+        }
+
+        // === FORM SUBMIT ===
+        function submitForm() {
+            const name = document.getElementById('formName').value;
+            const email = document.getElementById('formEmail').value;
+            const pig = document.getElementById('formPig').value;
+
+            if (!name || !email) {
+                showToast('🐽 Заполните имя и свинную почту!');
+                return;
+            }
+
+            showToast(`🎉 Спасибо, ${name}! Ваша свинья уже хрюкает от радости!`);
+
+            document.getElementById('formName').value = '';
+            document.getElementById('formEmail').value = '';
+            document.getElementById('formPig').value = '';
+            document.getElementById('formMessage').value = '';
+        }
+
+        // === PARALLAX SHAPES ===
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.floating-shape');
+            const x = (e.clientX / window.innerWidth - 0.5) * 2;
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+            shapes.forEach((shape, i) => {
+                const speed = (i + 1) * 8;
+                shape.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
