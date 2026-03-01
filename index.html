@@ -439,9 +439,259 @@
             background: linear-gradient(180deg, var(--warm-bg), white);
         }
 
+        /* ===== PRODUCTS HEADER ===== */
+        .products-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .products-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            text-align: center;
+            color: var(--pink-dark);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A, var(--warm-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(194, 91, 106, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .pig-hoof {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            animation: pigHoofBounce 2s ease-in-out infinite;
+            position: relative;
+            z-index: 3;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        .left-hoof {
+            animation-delay: 0s;
+        }
+
+        .right-hoof {
+            animation-delay: -1s;
+        }
+
+        @keyframes pigHoofBounce {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1);
+                filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            }
+            25% { 
+                transform: translateY(-10px) rotate(5deg) scale(1.1);
+                filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+            }
+            50% { 
+                transform: translateY(0) rotate(0deg) scale(1);
+                filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            }
+            75% { 
+                transform: translateY(5px) rotate(-5deg) scale(0.95);
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+            }
+        }
+
+        /* Декоративные элементы вокруг заголовка */
+        .products-header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(194, 91, 106, 0.3), transparent);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .pig-hoof::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,182,193,0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: hoofGlow 3s ease-in-out infinite;
+        }
+
+        .left-hoof::before {
+            animation-delay: 0s;
+        }
+
+        .right-hoof::before {
+            animation-delay: -1.5s;
+        }
+
+        @keyframes hoofGlow {
+            0%, 100% { 
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% { 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .products-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .pig-hoof {
+                font-size: 2.5rem;
+            }
+            
+            .products-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+        }
+
+        /* ===== SLIDER STYLES ===== */
+        .products-slider-trigger {
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A);
+            color: white;
+            border-radius: 24px;
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 30px rgba(194, 91, 106, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .products-slider-trigger::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .products-slider-trigger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(194, 91, 106, 0.35);
+            background: linear-gradient(135deg, #E8657A, var(--pink-dark));
+        }
+
+        .products-slider-trigger:hover::before {
+            left: 100%;
+        }
+
+        .products-trigger-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .products-trigger-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .products-trigger-desc {
+            font-size: 0.95rem;
+            margin: 0;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .products-trigger-icon {
+            font-size: 1.5rem;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255,255,255,0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .products-slider-trigger:hover .products-trigger-icon {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px) scale(1.1);
+        }
+
+        .products-slider-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .products-slider-content.open {
+            max-height: 2000px; /* Достаточно большое значение для контента */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .products-slider-content.open .product-card {
+            animation: slideInUp 0.6s ease forwards;
+            animation-delay: calc(var(--index) * 0.1s);
+        }
+
+        /* Нумерация карточек для анимации */
+        .products-slider-content.open .products-grid > .product-card:nth-child(1) { --index: 0; }
+        .products-slider-content.open .products-grid > .product-card:nth-child(2) { --index: 1; }
+        .products-slider-content.open .products-grid > .product-card:nth-child(3) { --index: 2; }
+        .products-slider-content.open .products-grid > .product-card:nth-child(4) { --index: 3; }
+        .products-slider-content.open .products-grid > .product-card:nth-child(5) { --index: 4; }
+        .products-slider-content.open .products-grid > .product-card:nth-child(6) { --index: 5; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .potential-products-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
             gap: 2rem;
         }
 
@@ -1149,14 +1399,25 @@
     <!-- PRODUCTS -->
     <section class="section products" id="products">
         <div class="section-inner">
-            <div class="section-header reveal">
-                <div class="section-tag">Ассортимент</div>
-                <h2 class="section-title">Наши фирменные свиньи</h2>
-                <p class="section-desc">
-                    Каждая свинья — произведение искусства. Скрещённая с любовью и лёгким безумием.
-                </p>
+            <!-- Заголовок секции с пяточками -->
+            <div class="products-header reveal">
+                <div class="pig-hoof left-hoof">🐽</div>
+                <h2 class="products-title">СВИНОЙ АССОРТИМЕНТ</h2>
+                <div class="pig-hoof right-hoof">🐽</div>
             </div>
-            <div class="products-grid">
+
+            <!-- Слайдер-триггер -->
+            <div class="products-slider-trigger" id="productsTrigger" onclick="toggleProductsSlider()">
+                <div class="products-trigger-content">
+                    <h2 class="products-trigger-title">Наши фирменные свиньи</h2>
+                    <p class="products-trigger-desc">Каждая свинья — произведение искусства. Скрещённая с любовью и лёгким безумием.</p>
+                </div>
+                <div class="products-trigger-icon" id="triggerIcon">▼</div>
+            </div>
+            
+            <!-- Слайдер с товарами -->
+            <div class="products-slider-content" id="productsSlider">
+                <div class="products-grid">
 
                 <!-- Product 1 -->
                 <div class="product-card reveal">
@@ -1179,9 +1440,9 @@
                     <div class="product-card-badge">NEW</div>
                     <div class="product-image"><img src="стол.png" alt="Свинный стол «Хрю-комфорт»"></div>
                     <div class="product-info">
-                        <div class="product-name">Свинный стол «Хрю-комфорт»</div>
+                        <div class="product-name">Свиной стол «Хрю-комфорт»</div>
                         <p class="product-desc">
-                            Стол, который хрюкает, когда на него ставят горячее без подставки. Имеет четыре копытца вместо ножек и свинное лакированное покрытие. Выдерживает до 200 кг желудей.
+                            Стол, который хрюкает, когда на него ставят горячее без подставки. Имеет четыре копытца вместо ножек и свиной лакированное покрытие. Выдерживает до 200 кг желудей.
                         </p>
                         <div class="product-footer">
                             <div class="product-price">₽124 500 <small>/шт</small></div>
@@ -1260,6 +1521,326 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <!-- POTENTIAL PRODUCTS -->
+    <section class="section products" id="potential-products">
+        <div class="section-inner">
+            <!-- Второй слайдер-триггер -->
+            <div class="products-slider-trigger" id="potentialProductsTrigger" onclick="togglePotentialProductsSlider()">
+                <div class="products-trigger-content">
+                    <h2 class="products-trigger-title">Здесь могли бы быть ваши свиньи</h2>
+                    <p class="products-trigger-desc">Расширенный ассортимент. 20 уникальных гибридов для любого вкуса.</p>
+                </div>
+                <div class="products-trigger-icon" id="potentialTriggerIcon">▼</div>
+            </div>
+            
+            <!-- Второй слайдер с потенциальными товарами -->
+            <div class="products-slider-content" id="potentialProductsSlider">
+                <div class="potential-products-grid">
+                    <!-- 20 карточек товаров -->
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">NEW</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 1</div>
+                            <p class="product-desc">
+                                Уникальный гибрид с необычными характеристиками. Идеально подходит для коллекционеров редких свиней.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽199 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 1')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">VIP</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 2</div>
+                            <p class="product-desc">
+                                Эксклюзивный вариант для настоящих ценителей свиного искусства.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽299 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 2')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">ХИТ</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 3</div>
+                            <p class="product-desc">
+                                Самый популярный вариант среди наших клиентов. Проверено временем!
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽249 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 3')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">🔥 АКЦИЯ</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 4</div>
+                            <p class="product-desc">
+                                Специальное предложение! Ограниченная серия с уникальным дизайном.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽179 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 4')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">ЛЮКС</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 5</div>
+                            <p class="product-desc">
+                                Роскошный вариант для самых взыскательных клиентов.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽399 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 5')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">NEW</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 6</div>
+                            <p class="product-desc">
+                                Новинка сезона! Современный дизайн и передовые технологии.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽229 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 6')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">VIP</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 7</div>
+                            <p class="product-desc">
+                                Премиум класс с гарантией качества и уникальными характеристиками.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽349 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 7')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">ХИТ</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 8</div>
+                            <p class="product-desc">
+                                Бестселлер с отличным соотношением цена/качество.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽189 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 8')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">🔥 АКЦИЯ</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 9</div>
+                            <p class="product-desc">
+                                Специальное предложение для первых покупателей!
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽159 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 9')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">ЛЮКС</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 10</div>
+                            <p class="product-desc">
+                                Элитный вариант с ручной сборкой и индивидуальным подходом.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽449 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 10')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">NEW</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 11</div>
+                            <p class="product-desc">
+                                Инновационная модель с передовыми технологиями.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽279 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 11')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">VIP</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 12</div>
+                            <p class="product-desc">
+                                Эксклюзив для избранных. Ограниченная серия.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽379 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 12')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">ХИТ</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 13</div>
+                            <p class="product-desc">
+                                Самый востребованный вариант на рынке.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽219 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 13')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">🔥 АКЦИЯ</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 14</div>
+                            <p class="product-desc">
+                                Сезонное предложение! Только сейчас по специальной цене.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽169 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 14')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">ЛЮКС</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 15</div>
+                            <p class="product-desc">
+                                Королевский вариант для настоящих ценителей.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽499 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 15')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">NEW</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 16</div>
+                            <p class="product-desc">
+                                Новинка! Современный дизайн и передовые технологии.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽239 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 16')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">VIP</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 17</div>
+                            <p class="product-desc">
+                                Премиум качество с гарантией надежности.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽329 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 17')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">ХИТ</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 18</div>
+                            <p class="product-desc">
+                                Лидер продаж с отличными характеристиками.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽199 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 18')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">🔥 АКЦИЯ</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 19</div>
+                            <p class="product-desc">
+                                Специальное предложение! Выгодная цена на ограниченное время.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽149 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 19')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">ЛЮКС</div>
+                        <div class="product-image">🐷</div>
+                        <div class="product-info">
+                            <div class="product-name">Здесь могла бы быть ваша свинья 20</div>
+                            <p class="product-desc">
+                                Элитный класс с индивидуальным подходом и ручной сборкой.
+                            </p>
+                            <div class="product-footer">
+                                <div class="product-price">₽549 999 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья 20')">В хлев 🛒</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1387,7 +1968,7 @@
                         <select id="formPig">
                             <option value="">Выберите свинью...</option>
                             <option value="bulldozer">🚜 Свинобульдозер™</option>
-                            <option value="table">🪑 Свинный стол «Хрю-комфорт»</option>
+                            <option value="table">🪑 Свиной стол «Хрю-комфорт»</option>
                             <option value="cloud">☁️ Свинное облако</option>
                             <option value="guitar">🎸 Свинная гитара</option>
                             <option value="microscope">🔬 Свинный микроскоп</option>
@@ -1620,7 +2201,7 @@
         function getProductName(value) {
             const products = {
                 'bulldozer': '🚜 Свинобульдозер™',
-                'table': '🪑 Свинный стол «Хрю-комфорт»',
+                'table': '🪑 Свиной стол «Хрю-комфорт»',
                 'cloud': '☁️ Свинное облако',
                 'guitar': '🎸 Свинная гитара',
                 'microscope': '🔬 Свинный микроскоп',
@@ -1679,6 +2260,79 @@
             activeIndex = (activeIndex - 1 + images.length) % images.length;
             images[activeIndex].classList.add('active');
         }
+
+        // === PRODUCTS SLIDER ===
+        function toggleProductsSlider() {
+            const slider = document.getElementById('productsSlider');
+            const icon = document.getElementById('triggerIcon');
+            const trigger = document.getElementById('productsTrigger');
+            
+            slider.classList.toggle('open');
+            trigger.classList.toggle('active');
+            
+            if (slider.classList.contains('open')) {
+                icon.textContent = '▲';
+                icon.style.transform = 'rotate(180deg)';
+                // Сохраняем состояние в localStorage
+                localStorage.setItem('productsSliderOpen', 'true');
+            } else {
+                icon.textContent = '▼';
+                icon.style.transform = 'rotate(0deg)';
+                localStorage.setItem('productsSliderOpen', 'false');
+            }
+        }
+
+        // === POTENTIAL PRODUCTS SLIDER ===
+        function togglePotentialProductsSlider() {
+            const slider = document.getElementById('potentialProductsSlider');
+            const icon = document.getElementById('potentialTriggerIcon');
+            const trigger = document.getElementById('potentialProductsTrigger');
+            
+            slider.classList.toggle('open');
+            trigger.classList.toggle('active');
+            
+            if (slider.classList.contains('open')) {
+                icon.textContent = '▲';
+                icon.style.transform = 'rotate(180deg)';
+                // Сохраняем состояние в localStorage
+                localStorage.setItem('potentialProductsSliderOpen', 'true');
+            } else {
+                icon.textContent = '▼';
+                icon.style.transform = 'rotate(0deg)';
+                localStorage.setItem('potentialProductsSliderOpen', 'false');
+            }
+        }
+
+        // Инициализация слайдеров при загрузке страницы
+        window.addEventListener('DOMContentLoaded', () => {
+            const slider = document.getElementById('productsSlider');
+            const icon = document.getElementById('triggerIcon');
+            const trigger = document.getElementById('productsTrigger');
+            
+            // Проверяем сохранённое состояние первого слайдера
+            const savedState = localStorage.getItem('productsSliderOpen');
+            
+            if (savedState === 'true') {
+                slider.classList.add('open');
+                icon.textContent = '▲';
+                icon.style.transform = 'rotate(180deg)';
+                trigger.classList.add('active');
+            }
+
+            // Проверяем сохранённое состояние второго слайдера
+            const potentialSlider = document.getElementById('potentialProductsSlider');
+            const potentialIcon = document.getElementById('potentialTriggerIcon');
+            const potentialTrigger = document.getElementById('potentialProductsTrigger');
+            
+            const savedPotentialState = localStorage.getItem('potentialProductsSliderOpen');
+            
+            if (savedPotentialState === 'true') {
+                potentialSlider.classList.add('open');
+                potentialIcon.textContent = '▲';
+                potentialIcon.style.transform = 'rotate(180deg)';
+                potentialTrigger.classList.add('active');
+            }
+        });
     </script>
 </body>
 </html>
