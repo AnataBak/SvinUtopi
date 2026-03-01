@@ -9,7 +9,6 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-
         :root {
             --pink-light: #FFF0F3;
             --pink-mid: #FFB6C1;
@@ -21,18 +20,15 @@
             --text-dark: #2D1F14;
             --text-light: #6B5344;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-dark);
             background: var(--warm-bg);
             overflow-x: hidden;
         }
-
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
         }
-
         /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
@@ -46,12 +42,10 @@
             border-bottom: 1px solid rgba(212, 165, 116, 0.2);
             transition: all 0.4s ease;
         }
-
         .navbar.scrolled {
             background: rgba(253, 246, 240, 0.95);
             box-shadow: 0 4px 30px rgba(139, 99, 71, 0.1);
         }
-
         .nav-inner {
             max-width: 1280px;
             margin: 0 auto;
@@ -60,7 +54,6 @@
             align-items: center;
             justify-content: space-between;
         }
-
         .nav-logo {
             display: flex;
             align-items: center;
@@ -68,18 +61,15 @@
             text-decoration: none;
             color: var(--text-dark);
         }
-
         .nav-logo-icon {
             font-size: 2rem;
             animation: pigBounce 2s ease-in-out infinite;
         }
-
         @keyframes pigBounce {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             25% { transform: translateY(-5px) rotate(-5deg); }
             75% { transform: translateY(-3px) rotate(5deg); }
         }
-
         .nav-logo-text {
             font-family: 'Playfair Display', serif;
             font-weight: 900;
@@ -89,13 +79,12 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
+            align-items: center;
         }
-
         .nav-links a {
             text-decoration: none;
             color: var(--text-light);
@@ -104,7 +93,6 @@
             position: relative;
             transition: color 0.3s;
         }
-
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -116,10 +104,45 @@
             transition: width 0.3s ease;
             border-radius: 2px;
         }
-
         .nav-links a:hover { color: var(--pink-dark); }
         .nav-links a:hover::after { width: 100%; }
-
+        /* Cart badge in navbar */
+        .nav-cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+        .nav-cart-btn:hover { transform: scale(1.15); }
+        .nav-cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--pink-dark);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+        }
+        .nav-cart-badge.empty { display: none; }
+        .nav-cart-badge.pulse {
+            animation: cartPulse 0.4s ease;
+        }
+        @keyframes cartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
         .burger {
             display: none;
             flex-direction: column;
@@ -129,7 +152,6 @@
             border: none;
             padding: 5px;
         }
-
         .burger span {
             width: 25px;
             height: 2.5px;
@@ -137,11 +159,9 @@
             border-radius: 5px;
             transition: all 0.3s ease;
         }
-
         .burger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
         .burger.active span:nth-child(2) { opacity: 0; }
         .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
         /* ===== HERO ===== */
         .hero {
             min-height: 100vh;
@@ -152,51 +172,26 @@
             overflow: hidden;
             background: linear-gradient(160deg, var(--warm-bg) 0%, var(--pink-light) 50%, #FFE4E9 100%);
         }
-
         .hero-bg-shapes {
             position: absolute;
             inset: 0;
             pointer-events: none;
         }
-
         .floating-shape {
             position: absolute;
             border-radius: 50%;
             opacity: 0.15;
             animation: floatShape 8s ease-in-out infinite;
         }
-
-        .floating-shape:nth-child(1) {
-            width: 300px; height: 300px;
-            background: var(--pink-mid);
-            top: 10%; left: -5%;
-            animation-delay: 0s;
-        }
-        .floating-shape:nth-child(2) {
-            width: 200px; height: 200px;
-            background: var(--warm-gold);
-            top: 60%; right: -3%;
-            animation-delay: -3s;
-        }
-        .floating-shape:nth-child(3) {
-            width: 150px; height: 150px;
-            background: var(--pink-deep);
-            bottom: 10%; left: 20%;
-            animation-delay: -5s;
-        }
-        .floating-shape:nth-child(4) {
-            width: 100px; height: 100px;
-            background: var(--warm-gold);
-            top: 20%; right: 20%;
-            animation-delay: -2s;
-        }
-
+        .floating-shape:nth-child(1) { width: 300px; height: 300px; background: var(--pink-mid); top: 10%; left: -5%; animation-delay: 0s; }
+        .floating-shape:nth-child(2) { width: 200px; height: 200px; background: var(--warm-gold); top: 60%; right: -3%; animation-delay: -3s; }
+        .floating-shape:nth-child(3) { width: 150px; height: 150px; background: var(--pink-deep); bottom: 10%; left: 20%; animation-delay: -5s; }
+        .floating-shape:nth-child(4) { width: 100px; height: 100px; background: var(--warm-gold); top: 20%; right: 20%; animation-delay: -2s; }
         @keyframes floatShape {
             0%, 100% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(30px, -30px) scale(1.05); }
             66% { transform: translate(-20px, 20px) scale(0.95); }
         }
-
         .hero-content {
             text-align: center;
             padding: 2rem;
@@ -204,7 +199,6 @@
             position: relative;
             z-index: 2;
         }
-
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -220,7 +214,6 @@
             backdrop-filter: blur(10px);
             animation: fadeInDown 1s ease;
         }
-
         .hero h1 {
             font-size: clamp(2.5rem, 7vw, 5rem);
             font-weight: 900;
@@ -228,14 +221,12 @@
             margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease 0.2s both;
         }
-
         .hero h1 .highlight {
             background: linear-gradient(135deg, var(--pink-dark), #E8657A, var(--warm-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .hero-subtitle {
             font-size: clamp(1rem, 2.5vw, 1.3rem);
             color: var(--text-light);
@@ -244,7 +235,6 @@
             line-height: 1.7;
             animation: fadeInUp 1s ease 0.4s both;
         }
-
         .hero-buttons {
             display: flex;
             gap: 1rem;
@@ -252,7 +242,6 @@
             flex-wrap: wrap;
             animation: fadeInUp 1s ease 0.6s both;
         }
-
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -269,12 +258,10 @@
             transition: all 0.4s ease;
             box-shadow: 0 8px 30px rgba(194, 91, 106, 0.3);
         }
-
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 40px rgba(194, 91, 106, 0.45);
         }
-
         .btn-secondary {
             display: inline-flex;
             align-items: center;
@@ -290,14 +277,12 @@
             text-decoration: none;
             transition: all 0.4s ease;
         }
-
         .btn-secondary:hover {
             border-color: var(--pink-dark);
             color: var(--pink-dark);
             transform: translateY(-3px);
             background: rgba(255, 182, 193, 0.1);
         }
-
         .hero-stats {
             display: flex;
             justify-content: center;
@@ -305,18 +290,13 @@
             margin-top: 4rem;
             animation: fadeInUp 1s ease 0.8s both;
         }
-
-        .stat-item {
-            text-align: center;
-        }
-
+        .stat-item { text-align: center; }
         .stat-number {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 900;
             color: var(--pink-dark);
         }
-
         .stat-label {
             font-size: 0.8rem;
             color: var(--text-light);
@@ -324,22 +304,10 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
         /* ===== SECTION STYLES ===== */
-        .section {
-            padding: 6rem 2rem;
-        }
-
-        .section-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
+        .section { padding: 6rem 2rem; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
         .section-tag {
             display: inline-block;
             font-size: 0.8rem;
@@ -349,13 +317,11 @@
             color: var(--pink-dark);
             margin-bottom: 1rem;
         }
-
         .section-title {
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 900;
             margin-bottom: 1rem;
         }
-
         .section-desc {
             font-size: 1.1rem;
             color: var(--text-light);
@@ -363,19 +329,14 @@
             margin: 0 auto;
             line-height: 1.7;
         }
-
         /* ===== ABOUT ===== */
-        .about {
-            background: white;
-        }
-
+        .about { background: white; }
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
-
         .about-image {
             position: relative;
             border-radius: 24px;
@@ -388,7 +349,6 @@
             font-size: 8rem;
             box-shadow: 0 20px 60px rgba(194, 91, 106, 0.15);
         }
-
         .about-image::after {
             content: '🏆';
             position: absolute;
@@ -397,27 +357,14 @@
             font-size: 3rem;
             animation: pigBounce 3s ease-in-out infinite;
         }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.3;
-        }
-
-        .about-text p {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 1.2rem;
-            font-size: 1.05rem;
-        }
-
+        .about-text h3 { font-size: 1.8rem; margin-bottom: 1.5rem; line-height: 1.3; }
+        .about-text p { color: var(--text-light); line-height: 1.8; margin-bottom: 1.2rem; font-size: 1.05rem; }
         .about-features {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
             margin-top: 2rem;
         }
-
         .about-feature {
             display: flex;
             align-items: center;
@@ -429,17 +376,9 @@
             font-size: 0.9rem;
             transition: transform 0.3s;
         }
-
-        .about-feature:hover {
-            transform: translateX(5px);
-        }
-
+        .about-feature:hover { transform: translateX(5px); }
         /* ===== PRODUCTS ===== */
-        .products {
-            background: linear-gradient(180deg, var(--warm-bg), white);
-        }
-
-        /* ===== PRODUCTS HEADER ===== */
+        .products { background: linear-gradient(180deg, var(--warm-bg), white); }
         .products-header {
             display: flex;
             align-items: center;
@@ -448,7 +387,6 @@
             margin-bottom: 2rem;
             position: relative;
         }
-
         .products-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
@@ -461,11 +399,9 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 4px 20px rgba(194, 91, 106, 0.2);
             position: relative;
             z-index: 2;
         }
-
         .pig-hoof {
             font-size: clamp(2rem, 4vw, 3.5rem);
             animation: pigHoofBounce 2s ease-in-out infinite;
@@ -473,34 +409,14 @@
             z-index: 3;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
         }
-
-        .left-hoof {
-            animation-delay: 0s;
-        }
-
-        .right-hoof {
-            animation-delay: -1s;
-        }
-
+        .left-hoof { animation-delay: 0s; }
+        .right-hoof { animation-delay: -1s; }
         @keyframes pigHoofBounce {
-            0%, 100% { 
-                transform: translateY(0) rotate(0deg) scale(1);
-                filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-            }
-            25% { 
-                transform: translateY(-10px) rotate(5deg) scale(1.1);
-                filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
-            }
-            50% { 
-                transform: translateY(0) rotate(0deg) scale(1);
-                filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-            }
-            75% { 
-                transform: translateY(5px) rotate(-5deg) scale(0.95);
-                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
-            }
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            25% { transform: translateY(-10px) rotate(5deg) scale(1.1); }
+            50% { transform: translateY(0) rotate(0deg) scale(1); }
+            75% { transform: translateY(5px) rotate(-5deg) scale(0.95); }
         }
-
         .products-header::before {
             content: '';
             position: absolute;
@@ -512,7 +428,6 @@
             transform: translateY(-50%);
             z-index: 1;
         }
-
         .pig-hoof::before {
             content: '';
             position: absolute;
@@ -526,15 +441,12 @@
             z-index: -1;
             animation: hoofGlow 3s ease-in-out infinite;
         }
-
         .left-hoof::before { animation-delay: 0s; }
         .right-hoof::before { animation-delay: -1.5s; }
-
         @keyframes hoofGlow {
             0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
             50% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
         }
-
         /* ===== SLIDER STYLES ===== */
         .products-slider-trigger {
             background: linear-gradient(135deg, var(--pink-dark), #E8657A);
@@ -552,7 +464,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .products-slider-trigger::before {
             content: '';
             position: absolute;
@@ -563,23 +474,13 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.6s;
         }
-
         .products-slider-trigger:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(194, 91, 106, 0.35);
             background: linear-gradient(135deg, #E8657A, var(--pink-dark));
         }
-
-        .products-slider-trigger:hover::before {
-            left: 100%;
-        }
-
-        .products-trigger-content {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
+        .products-slider-trigger:hover::before { left: 100%; }
+        .products-trigger-content { display: flex; flex-direction: column; gap: 0.5rem; }
         .products-trigger-title {
             font-size: 1.5rem;
             font-weight: 900;
@@ -587,14 +488,12 @@
             font-family: 'Playfair Display', serif;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
         .products-trigger-desc {
             font-size: 0.95rem;
             margin: 0;
             opacity: 0.9;
             font-weight: 400;
         }
-
         .products-trigger-icon {
             font-size: 1.5rem;
             font-weight: 700;
@@ -610,12 +509,10 @@
             border: 2px solid rgba(255,255,255,0.2);
             flex-shrink: 0;
         }
-
         .products-slider-trigger:hover .products-trigger-icon {
             background: rgba(255,255,255,0.2);
             transform: translateY(-2px) scale(1.1);
         }
-
         .products-slider-content {
             max-height: 0;
             overflow: hidden;
@@ -623,52 +520,32 @@
             transform: translateY(-20px);
             transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         .products-slider-content.open {
             max-height: 5000px;
             opacity: 1;
             transform: translateY(0);
         }
-
-        .products-slider-content.open .product-card {
-            animation: slideInUp 0.6s ease forwards;
-            animation-delay: calc(var(--index) * 0.1s);
-        }
-
-        .products-slider-content.open .products-grid > .product-card:nth-child(1) { --index: 0; }
-        .products-slider-content.open .products-grid > .product-card:nth-child(2) { --index: 1; }
-        .products-slider-content.open .products-grid > .product-card:nth-child(3) { --index: 2; }
-        .products-slider-content.open .products-grid > .product-card:nth-child(4) { --index: 3; }
-        .products-slider-content.open .products-grid > .product-card:nth-child(5) { --index: 4; }
-        .products-slider-content.open .products-grid > .product-card:nth-child(6) { --index: 5; }
-
         @keyframes slideInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .products-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
-
-        /* Second slider grid - same as first */
         .potential-products-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
-
         .potential-products-grid .product-card {
             display: none;
         }
-
         .potential-products-grid .product-card.visible {
             display: block;
             animation: slideInUp 0.5s ease forwards;
         }
-
         .pagination-controls {
             display: flex;
             align-items: center;
@@ -677,7 +554,6 @@
             margin-top: 2rem;
             flex-wrap: wrap;
         }
-
         .pagination-btn {
             padding: 0.6rem 1.2rem;
             background: linear-gradient(135deg, var(--pink-dark), #E8657A);
@@ -691,31 +567,21 @@
             min-width: 40px;
             text-align: center;
         }
-
         .pagination-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(194, 91, 106, 0.4);
         }
-
         .pagination-btn:disabled {
             opacity: 0.4;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
-
         .pagination-btn.active-page {
             background: linear-gradient(135deg, #E8657A, var(--warm-gold));
             box-shadow: 0 4px 12px rgba(194, 91, 106, 0.4);
             transform: scale(1.1);
         }
-
-        .pagination-info {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
         .product-card {
             background: white;
             border-radius: 24px;
@@ -725,14 +591,12 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
-
         .product-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 50px rgba(194, 91, 106, 0.15), 0 0 30px rgba(147, 51, 234, 0.6);
             background: rgba(255, 182, 193, 0.08);
             border-color: rgba(212, 165, 116, 0.3);
         }
-
         .product-card-badge {
             position: absolute;
             top: 1rem;
@@ -745,7 +609,6 @@
             font-weight: 700;
             z-index: 5;
         }
-
         .product-image {
             height: 180px;
             display: flex;
@@ -757,56 +620,43 @@
             overflow: hidden;
             transition: transform 0.5s;
         }
-
-        .product-card:hover .product-image {
-            transform: scale(1.02);
-        }
-
+        .product-card:hover .product-image { transform: scale(1.02); }
         .product-image::before {
             content: '';
             position: absolute;
             inset: 0;
             background: radial-gradient(circle at 30% 70%, rgba(255,182,193,0.4), transparent 60%);
         }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
+        .product-info { padding: 1.5rem; }
         .product-name {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 0.75rem;
         }
-
         .product-desc {
             font-size: 0.9rem;
             color: var(--text-light);
             line-height: 1.6;
             margin-bottom: 1.25rem;
         }
-
         .product-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-
         .product-price {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
             font-weight: 900;
             color: var(--pink-dark);
         }
-
         .product-price small {
             font-family: 'Inter', sans-serif;
             font-size: 0.7rem;
             font-weight: 400;
             color: var(--text-light);
         }
-
         .product-btn {
             padding: 0.6rem 1.2rem;
             background: linear-gradient(135deg, var(--pink-dark), #E8657A);
@@ -818,27 +668,22 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-
         .product-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 15px rgba(194, 91, 106, 0.4);
         }
-
         /* ===== TESTIMONIALS ===== */
         .testimonials {
             background: linear-gradient(135deg, #2D1F14, #4A332A);
             color: white;
         }
-
         .testimonials .section-tag { color: var(--warm-gold); }
         .testimonials .section-desc { color: rgba(255,255,255,0.6); }
-
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
-
         .testimonial-card {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
@@ -846,18 +691,11 @@
             padding: 2rem;
             transition: all 0.3s;
         }
-
         .testimonial-card:hover {
             background: rgba(255,255,255,0.1);
             transform: translateY(-5px);
         }
-
-        .testimonial-stars {
-            color: #FFD700;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
+        .testimonial-stars { color: #FFD700; font-size: 1.1rem; margin-bottom: 1rem; }
         .testimonial-text {
             font-size: 0.95rem;
             line-height: 1.7;
@@ -865,13 +703,7 @@
             margin-bottom: 1.5rem;
             font-style: italic;
         }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
+        .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
         .testimonial-avatar {
             width: 45px;
             height: 45px;
@@ -882,28 +714,15 @@
             justify-content: center;
             font-size: 1.3rem;
         }
-
-        .testimonial-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .testimonial-role {
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.4);
-        }
-
+        .testimonial-name { font-weight: 600; font-size: 0.9rem; }
+        .testimonial-role { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
         /* ===== CONTACT ===== */
-        .contact {
-            background: white;
-        }
-
+        .contact { background: white; }
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
         }
-
         .contact-info-card {
             display: flex;
             gap: 1rem;
@@ -913,12 +732,10 @@
             margin-bottom: 1.5rem;
             transition: all 0.3s;
         }
-
         .contact-info-card:hover {
             transform: translateX(8px);
             background: #FFE4E9;
         }
-
         .contact-icon {
             width: 50px;
             height: 50px;
@@ -930,29 +747,14 @@
             font-size: 1.3rem;
             flex-shrink: 0;
         }
-
-        .contact-info-title {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .contact-info-text {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            line-height: 1.5;
-        }
-
+        .contact-info-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; }
+        .contact-info-text { font-size: 0.9rem; color: var(--text-light); line-height: 1.5; }
         .contact-form {
             background: var(--warm-bg);
             border-radius: 24px;
             padding: 2.5rem;
         }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
+        .form-group { margin-bottom: 1.25rem; }
         .form-group label {
             display: block;
             font-weight: 600;
@@ -960,7 +762,6 @@
             margin-bottom: 0.5rem;
             color: var(--text-dark);
         }
-
         .form-group input,
         .form-group textarea,
         .form-group select {
@@ -975,16 +776,13 @@
             transition: all 0.3s;
             outline: none;
         }
-
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             border-color: var(--pink-dark);
             box-shadow: 0 0 0 4px rgba(194, 91, 106, 0.1);
         }
-
         .form-group textarea { resize: vertical; min-height: 100px; }
-
         .form-submit {
             width: 100%;
             padding: 1rem;
@@ -997,19 +795,151 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-
         .form-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(194, 91, 106, 0.3);
         }
-
+        /* ===== CART IN FORM ===== */
+        .cart-section {
+            margin-bottom: 1.5rem;
+        }
+        .cart-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .cart-empty-msg {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            background: rgba(255,182,193,0.1);
+            border-radius: 12px;
+            border: 2px dashed rgba(194, 91, 106, 0.2);
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(212, 165, 116, 0.15);
+            transition: all 0.3s;
+            animation: slideInUp 0.3s ease;
+        }
+        .cart-item:hover {
+            border-color: rgba(194, 91, 106, 0.3);
+            box-shadow: 0 2px 10px rgba(194, 91, 106, 0.1);
+        }
+        .cart-item-name {
+            flex: 1;
+            font-weight: 600;
+            font-size: 0.85rem;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .cart-item-price {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--pink-dark);
+            white-space: nowrap;
+        }
+        .cart-qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .cart-qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid rgba(194, 91, 106, 0.3);
+            background: var(--pink-light);
+            color: var(--pink-dark);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+        .cart-qty-btn:hover {
+            background: var(--pink-dark);
+            color: white;
+        }
+        .cart-qty-num {
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 20px;
+            text-align: center;
+        }
+        .cart-remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            opacity: 0.4;
+            transition: all 0.2s;
+            padding: 4px;
+        }
+        .cart-remove-btn:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--pink-light), #FFE8ED);
+            border-radius: 12px;
+            margin-top: 0.75rem;
+            font-weight: 700;
+        }
+        .cart-total-label {
+            font-size: 0.95rem;
+        }
+        .cart-total-sum {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--pink-dark);
+        }
+        .cart-clear-btn {
+            display: block;
+            width: 100%;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: transparent;
+            border: 1px solid rgba(194, 91, 106, 0.2);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .cart-clear-btn:hover {
+            background: rgba(194, 91, 106, 0.1);
+            color: var(--pink-dark);
+            border-color: var(--pink-dark);
+        }
         /* ===== FOOTER ===== */
         .footer {
             background: var(--text-dark);
             color: rgba(255,255,255,0.6);
             padding: 3rem 2rem 1.5rem;
         }
-
         .footer-inner {
             max-width: 1200px;
             margin: 0 auto;
@@ -1019,24 +949,14 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-
         .footer-logo {
             font-family: 'Playfair Display', serif;
             font-weight: 900;
             font-size: 1.3rem;
             color: white;
         }
-
-        .footer-text {
-            font-size: 0.85rem;
-            text-align: center;
-        }
-
-        .footer-socials {
-            display: flex;
-            gap: 0.75rem;
-        }
-
+        .footer-text { font-size: 0.85rem; text-align: center; }
+        .footer-socials { display: flex; gap: 0.75rem; }
         .footer-social {
             width: 40px;
             height: 40px;
@@ -1049,34 +969,28 @@
             transition: all 0.3s;
             cursor: pointer;
         }
-
         .footer-social:hover {
             background: var(--pink-dark);
             transform: translateY(-3px);
         }
-
         /* ===== ANIMATIONS ===== */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .reveal {
             opacity: 0;
             transform: translateY(40px);
             transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         /* ===== MOBILE NAV ===== */
         .mobile-menu {
             display: none;
@@ -1093,9 +1007,7 @@
             justify-content: center;
             gap: 2rem;
         }
-
         .mobile-menu.active { display: flex; }
-
         .mobile-menu a {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
@@ -1104,9 +1016,7 @@
             color: var(--text-dark);
             transition: color 0.3s;
         }
-
         .mobile-menu a:hover { color: var(--pink-dark); }
-
         .mobile-close {
             position: absolute;
             top: 1.5rem;
@@ -1117,7 +1027,6 @@
             cursor: pointer;
             color: var(--text-dark);
         }
-
         /* pig marquee */
         .pig-marquee {
             overflow: hidden;
@@ -1128,23 +1037,19 @@
             font-size: 1.1rem;
             font-weight: 600;
         }
-
         .pig-marquee-inner {
             display: inline-block;
             animation: marquee 20s linear infinite;
         }
-
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-
         @keyframes heartFloat {
             0% { transform: scale(0) rotate(0deg); opacity: 1; }
             50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
             100% { transform: scale(0) rotate(360deg) translateY(-100px); opacity: 0; }
         }
-
         /* Toast */
         .toast {
             position: fixed;
@@ -1161,12 +1066,7 @@
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 10000;
         }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
+        .toast.show { transform: translateY(0); opacity: 1; }
         /* Scroll to top */
         .scroll-to-top {
             position: fixed;
@@ -1186,168 +1086,71 @@
             box-shadow: 0 4px 12px rgba(194, 91, 106, 0.3);
             z-index: 1000;
         }
-
         .scroll-to-top.show { opacity: 1; visibility: visible; }
         .scroll-to-top:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(194, 91, 106, 0.4); }
-
         /* Image slider */
-        .image-slider {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .slider-image {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
+        .image-slider { position: relative; width: 100%; height: 100%; overflow: hidden; }
+        .slider-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s ease; }
         .slider-image.active { opacity: 1; }
-
-        .slider-btn {
-            position: absolute;
-            top: 0; bottom: 0;
-            width: 50px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-            opacity: 0;
-        }
-
+        .slider-btn { position: absolute; top: 0; bottom: 0; width: 50px; background: transparent; border: none; cursor: pointer; transition: all 0.3s ease; z-index: 10; opacity: 0; }
         .slider-btn:hover { background: rgba(255, 255, 255, 0.3); opacity: 1; }
         .slider-btn.prev { left: 10px; }
         .slider-btn.next { right: 10px; }
-
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .products-grid { grid-template-columns: repeat(2, 1fr); }
             .potential-products-grid { grid-template-columns: repeat(2, 1fr); }
             .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .burger { display: flex; }
-
             .about-grid { grid-template-columns: 1fr; gap: 2rem; }
             .products-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
-            .potential-products-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 1rem; 
-            }
+            .potential-products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .testimonials-grid { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
             .about-features { grid-template-columns: 1fr; }
-
             .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
             .section { padding: 4rem 1.25rem; }
-
-            .products-header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
+            .products-header { flex-direction: column; gap: 1rem; }
             .pig-hoof { font-size: 2.5rem; }
             .products-title { font-size: 2rem; letter-spacing: 2px; }
-
-            /* Smaller cards on mobile for potential grid */
-            .potential-products-grid .product-image {
-                height: 120px;
-                font-size: 2.5rem;
-            }
-            
-            .potential-products-grid .product-info {
-                padding: 0.75rem;
-            }
-            
-            .potential-products-grid .product-name {
-                font-size: 0.95rem;
-                margin-bottom: 0.4rem;
-            }
-            
+            .potential-products-grid .product-image { height: 120px; font-size: 2.5rem; }
+            .potential-products-grid .product-info { padding: 0.75rem; }
+            .potential-products-grid .product-name { font-size: 0.95rem; margin-bottom: 0.4rem; }
             .potential-products-grid .product-desc {
-                font-size: 0.78rem;
-                line-height: 1.4;
-                margin-bottom: 0.75rem;
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
+                font-size: 0.78rem; line-height: 1.4; margin-bottom: 0.75rem;
+                display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
             }
-            
-            .potential-products-grid .product-price {
-                font-size: 1rem;
-            }
-            
-            .potential-products-grid .product-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.75rem;
-            }
-
-            .potential-products-grid .product-card-badge {
-                font-size: 0.65rem;
-                padding: 0.2rem 0.5rem;
-                top: 0.5rem;
-                right: 0.5rem;
-            }
-
-            .scroll-to-top {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-                bottom: 30px;
-                right: 20px;
+            .potential-products-grid .product-price { font-size: 1rem; }
+            .potential-products-grid .product-btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+            .potential-products-grid .product-card-badge { font-size: 0.65rem; padding: 0.2rem 0.5rem; top: 0.5rem; right: 0.5rem; }
+            .scroll-to-top { width: 60px; height: 60px; font-size: 24px; bottom: 30px; right: 20px; }
+            /* Mobile cart item */
+            .cart-item { gap: 0.5rem; padding: 0.6rem 0.75rem; }
+            .cart-item-name { font-size: 0.78rem; }
+            .cart-item-price { font-size: 0.78rem; }
+            /* Mobile nav cart */
+            .mobile-cart-link {
+                font-size: 2rem !important;
+                position: relative;
             }
         }
-
         @media (max-width: 480px) {
             .hero-buttons { flex-direction: column; align-items: center; }
             .footer-inner { flex-direction: column; text-align: center; }
-            
-            .potential-products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-            }
-
-            .potential-products-grid .product-image {
-                height: 100px;
-                font-size: 2rem;
-            }
-            
-            .potential-products-grid .product-info {
-                padding: 0.6rem;
-            }
-            
-            .potential-products-grid .product-name {
-                font-size: 0.85rem;
-            }
-            
-            .potential-products-grid .product-desc {
-                font-size: 0.72rem;
-                -webkit-line-clamp: 2;
-            }
-            
-            .potential-products-grid .product-price {
-                font-size: 0.9rem;
-            }
-            
-            .potential-products-grid .product-footer {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.4rem;
-            }
+            .potential-products-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .potential-products-grid .product-image { height: 100px; font-size: 2rem; }
+            .potential-products-grid .product-info { padding: 0.6rem; }
+            .potential-products-grid .product-name { font-size: 0.85rem; }
+            .potential-products-grid .product-desc { font-size: 0.72rem; -webkit-line-clamp: 2; }
+            .potential-products-grid .product-price { font-size: 0.9rem; }
+            .potential-products-grid .product-footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
         }
     </style>
 </head>
 <body>
-
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="nav-inner">
@@ -1361,6 +1164,12 @@
                 <li><a href="#products">Ассортимент</a></li>
                 <li><a href="#reviews">Отзывы</a></li>
                 <li><a href="#contact">Контакты</a></li>
+                <li>
+                    <a href="#contact" class="nav-cart-btn" title="Корзина / Заказ">
+                        🛒
+                        <span class="nav-cart-badge empty" id="navCartBadge">0</span>
+                    </a>
+                </li>
             </ul>
             <button class="burger" id="burger" aria-label="Меню">
                 <span></span>
@@ -1369,7 +1178,6 @@
             </button>
         </div>
     </nav>
-
     <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-close" id="mobileClose">✕</button>
@@ -1378,8 +1186,8 @@
         <a href="#products" class="mobile-link">Ассортимент</a>
         <a href="#reviews" class="mobile-link">Отзывы</a>
         <a href="#contact" class="mobile-link">Контакты</a>
+        <a href="#contact" class="mobile-link mobile-cart-link">🛒 Корзина (<span id="mobileCartCount">0</span>)</a>
     </div>
-
     <!-- HERO -->
     <section class="hero" id="hero">
         <div class="hero-bg-shapes">
@@ -1420,7 +1228,6 @@
             </div>
         </div>
     </section>
-
     <!-- MARQUEE -->
     <div class="pig-marquee">
         <div class="pig-marquee-inner">
@@ -1428,7 +1235,6 @@
             🐷 Свинная роскошь &nbsp;&nbsp;✨&nbsp;&nbsp; Премиум хрюканье &nbsp;&nbsp;🐽&nbsp;&nbsp; Генетика будущего &nbsp;&nbsp;🌟&nbsp;&nbsp; Свинная элита &nbsp;&nbsp;🏆&nbsp;&nbsp; Хрю-кутюр &nbsp;&nbsp;💎&nbsp;&nbsp; Свинный люкс &nbsp;&nbsp;🐷&nbsp;&nbsp;
         </div>
     </div>
-
     <!-- ABOUT -->
     <section class="section about" id="about">
         <div class="section-inner">
@@ -1458,153 +1264,123 @@
             </div>
         </div>
     </section>
-
     <!-- PRODUCTS -->
     <section class="section products" id="products">
         <div class="section-inner">
-            <!-- Заголовок секции с пяточками -->
             <div class="products-header reveal">
                 <div class="pig-hoof left-hoof">🐽</div>
                 <h2 class="products-title">СВИНОЙ АССОРТИМЕНТ</h2>
                 <div class="pig-hoof right-hoof">🐽</div>
             </div>
-
-            <!-- Слайдер-триггер -->
+            <!-- Slider trigger 1 -->
             <div class="products-slider-trigger" id="productsTrigger" onclick="toggleProductsSlider()">
                 <div class="products-trigger-content">
                     <h2 class="products-trigger-title">Наши фирменные свиньи</h2>
                     <p class="products-trigger-desc">Каждая свинья — произведение искусства. Скрещённая с любовью и лёгким безумием.</p>
                 </div>
-                <div class="products-trigger-icon" id="triggerIcon">▼</div>
+                <div class="products-trigger-icon" id="triggerIcon">▲</div>
             </div>
             
-            <!-- Слайдер с товарами -->
-            <div class="products-slider-content" id="productsSlider">
+            <!-- Slider content 1 — OPEN by default -->
+            <div class="products-slider-content open" id="productsSlider">
                 <div class="products-grid">
-
-                <!-- Product 1 -->
-                <div class="product-card reveal">
-                    <div class="product-card-badge">ХИТ</div>
-                    <div class="product-image"><img src="2348537885cf11ee9e561ad242dc1d78_upscaled.jpg" alt="Свинобульдозер™"></div>
-                    <div class="product-info">
-                        <div class="product-name">Свинобульдозер™</div>
-                        <p class="product-desc">
-                            Могучий гибрид свиньи и бульдозера. Роет грядки пятачком со скоростью 40 км/ч. Обладает свинным турбонаддувом и хрюкает дизелем. Идеален для свинного строительства.
-                        </p>
-                        <div class="product-footer">
-                            <div class="product-price">₽849 000 <small>/шт</small></div>
-                            <button class="product-btn" onclick="addToCart(event, 'Свинобульдозер')">В хлев 🛒</button>
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">ХИТ</div>
+                        <div class="product-image"><img src="2348537885cf11ee9e561ad242dc1d78_upscaled.jpg" alt="Свинобульдозер™"></div>
+                        <div class="product-info">
+                            <div class="product-name">Свинобульдозер™</div>
+                            <p class="product-desc">Могучий гибрид свиньи и бульдозера. Роет грядки пятачком со скоростью 40 км/ч. Обладает свинным турбонаддувом и хрюкает дизелем.</p>
+                            <div class="product-footer">
+                                <div class="product-price">₽849 000 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинобульдозер™', 849000)">В хлев 🛒</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="product-card reveal">
-                    <div class="product-card-badge">NEW</div>
-                    <div class="product-image"><img src="стол.png" alt="Свинный стол «Хрю-комфорт»"></div>
-                    <div class="product-info">
-                        <div class="product-name">Свиной стол «Хрю-комфорт»</div>
-                        <p class="product-desc">
-                            Стол, который хрюкает, когда на него ставят горячее без подставки. Имеет четыре копытца вместо ножек и свиной лакированное покрытие. Выдерживает до 200 кг желудей.
-                        </p>
-                        <div class="product-footer">
-                            <div class="product-price">₽124 500 <small>/шт</small></div>
-                            <button class="product-btn" onclick="addToCart(event, 'Свинный стол')">В хлев 🛒</button>
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">NEW</div>
+                        <div class="product-image"><img src="стол.png" alt="Свиной стол «Хрю-комфорт»"></div>
+                        <div class="product-info">
+                            <div class="product-name">Свиной стол «Хрю-комфорт»</div>
+                            <p class="product-desc">Стол, который хрюкает, когда на него ставят горячее без подставки. Имеет четыре копытца вместо ножек.</p>
+                            <div class="product-footer">
+                                <div class="product-price">₽124 500 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свиной стол «Хрю-комфорт»', 124500)">В хлев 🛒</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-card reveal">
-                    <div class="product-card-badge">VIP</div>
-                    <div class="product-image"><img src="облако.png" alt="Свинное облако"></div>
-                    <div class="product-info">
-                        <div class="product-name">Свинное облако</div>
-                        <p class="product-desc">
-                            Летающая свинья-облако для свинного прогноза погоды. Парит над вашим домом и хрюкает перед дождём. Работает на свинном конденсате. Розовые осадки — бонус.
-                        </p>
-                        <div class="product-footer">
-                            <div class="product-price">₽2 100 000 <small>/шт</small></div>
-                            <button class="product-btn" onclick="addToCart(event, 'Свинное облако')">В хлев 🛒</button>
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">VIP</div>
+                        <div class="product-image"><img src="облако.png" alt="Свинное облако"></div>
+                        <div class="product-info">
+                            <div class="product-name">Свинное облако</div>
+                            <p class="product-desc">Летающая свинья-облако для свинного прогноза погоды. Парит над вашим домом и хрюкает перед дождём.</p>
+                            <div class="product-footer">
+                                <div class="product-price">₽2 100 000 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинное облако', 2100000)">В хлев 🛒</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="product-card reveal">
-                    <div class="product-image">
-                        <div class="image-slider" id="guitar-slider">
-                            <img src="гитара.png" alt="Свинная гитара «Пятачок Страдивари»" class="slider-image active">
-                            <img src="гитара2.png" alt="Свинная гитара «Пятачок Страдивари» - вид 2" class="slider-image">
-                            <button class="slider-btn prev" onclick="prevImage('guitar-slider')">‹</button>
-                            <button class="slider-btn next" onclick="nextImage('guitar-slider')">›</button>
+                    <div class="product-card reveal">
+                        <div class="product-image">
+                            <div class="image-slider" id="guitar-slider">
+                                <img src="гитара.png" alt="Свинная гитара" class="slider-image active">
+                                <img src="гитара2.png" alt="Свинная гитара - вид 2" class="slider-image">
+                                <button class="slider-btn prev" onclick="prevImage('guitar-slider')">‹</button>
+                                <button class="slider-btn next" onclick="nextImage('guitar-slider')">›</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Свинная гитара «Пятачок Страдивари»</div>
+                            <p class="product-desc">Музыкальный инструмент с корпусом из свинного бархата. Издаёт исключительно хрюкающие аккорды.</p>
+                            <div class="product-footer">
+                                <div class="product-price">₽567 000 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинная гитара «Пятачок Страдивари»', 567000)">В хлев 🛒</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="product-info">
-                        <div class="product-name">Свинная гитара «Пятачок Страдивари»</div>
-                        <p class="product-desc">
-                            Музыкальный инструмент с корпусом из свинного бархата. Издаёт исключительно хрюкающие аккорды. Каждая нота — как свинное серебро для ушей. Рекомендовано свинными критиками.
-                        </p>
-                        <div class="product-footer">
-                            <div class="product-price">₽567 000 <small>/шт</small></div>
-                            <button class="product-btn" onclick="addToCart(event, 'Свинная гитара')">В хлев 🛒</button>
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">🔥 АКЦИЯ</div>
+                        <div class="product-image"><img src="микроскоп.png" alt="Свинный микроскоп"></div>
+                        <div class="product-info">
+                            <div class="product-name">Свинный микроскоп</div>
+                            <p class="product-desc">Позволяет увидеть свинную ДНК во всей красе. Линзы из отполированных пятачков. Увеличение: х1000 хрю-единиц.</p>
+                            <div class="product-footer">
+                                <div class="product-price">₽345 900 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинный микроскоп', 345900)">В хлев 🛒</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product 5 -->
-                <div class="product-card reveal">
-                    <div class="product-card-badge">🔥 АКЦИЯ</div>
-                    <div class="product-image"><img src="микроскоп.png" alt="Свинный микроскоп"></div>
-                    <div class="product-info">
-                        <div class="product-name">Свинный микроскоп</div>
-                        <p class="product-desc">
-                            Позволяет увидеть свинную ДНК во всей красе. Линзы сделаны из отполированных пятачков, корпус — свинное титановое покрытие. Увеличение: х1000 хрю-единиц.
-                        </p>
-                        <div class="product-footer">
-                            <div class="product-price">₽345 900 <small>/шт</small></div>
-                            <button class="product-btn" onclick="addToCart(event, 'Свинный микроскоп')">В хлев 🛒</button>
+                    <div class="product-card reveal">
+                        <div class="product-card-badge">ЛЮКС</div>
+                        <div class="product-image"><img src="трон.png" alt="Свинной трон «Корона Хрюма»"></div>
+                        <div class="product-info">
+                            <div class="product-name">Свинной трон «Корона Хрюма»</div>
+                            <p class="product-desc">Королевский трон обитый свинным шёлком, с подлокотниками в форме копыт. Встроенная подача желудей.</p>
+                            <div class="product-footer">
+                                <div class="product-price">₽4 200 000 <small>/шт</small></div>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинной трон «Корона Хрюма»', 4200000)">В хлев 🛒</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product 6 -->
-                <div class="product-card reveal">
-                    <div class="product-card-badge">ЛЮКС</div>
-                    <div class="product-image"><img src="трон.png" alt="Свинной трон «Корона Хрюма»"></div>
-                    <div class="product-info">
-                        <div class="product-name">Свинной трон «Корона Хрюма»</div>
-                        <p class="product-desc">
-                            Королевский трон обитый свинным шёлком, с подлокотниками в форме копыт. Встроенная система свинного массажа и автоматическая подача желудей. Свинная аристократия одобряет.
-                        </p>
-                        <div class="product-footer">
-                            <div class="product-price">₽4 200 000 <small>/шт</small></div>
-                            <button class="product-btn" onclick="addToCart(event, 'Свинной трон')">В хлев 🛒</button>
-                        </div>
-                    </div>
-                </div>
-
                 </div>
             </div>
         </div>
     </section>
-
     <!-- POTENTIAL PRODUCTS -->
     <section class="section products" id="potential-products">
         <div class="section-inner">
-            <!-- Второй слайдер-триггер -->
+            <!-- Slider trigger 2 -->
             <div class="products-slider-trigger" id="potentialProductsTrigger" onclick="togglePotentialProductsSlider()">
                 <div class="products-trigger-content">
                     <h2 class="products-trigger-title">Здесь могли бы быть ваши свиньи</h2>
                     <p class="products-trigger-desc">Расширенный ассортимент. 20 уникальных гибридов для любого вкуса.</p>
                 </div>
-                <div class="products-trigger-icon" id="potentialTriggerIcon">▼</div>
+                <div class="products-trigger-icon" id="potentialTriggerIcon">▲</div>
             </div>
             
-            <!-- Второй слайдер с потенциальными товарами -->
-            <div class="products-slider-content" id="potentialProductsSlider">
+            <!-- Slider content 2 — OPEN by default -->
+            <div class="products-slider-content open" id="potentialProductsSlider">
                 <div class="potential-products-grid" id="potentialGrid">
-                    <!-- Card 1 -->
                     <div class="product-card">
                         <div class="product-card-badge">NEW</div>
                         <div class="product-image">🐷</div>
@@ -1613,11 +1389,10 @@
                             <p class="product-desc">Убирает квартиру пятачком. Всасывает пыль и хрюкает от чистоты.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽199 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 1')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья-Пылесос «Хрюмба»', 199999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 2 -->
                     <div class="product-card">
                         <div class="product-card-badge">VIP</div>
                         <div class="product-image">🐽</div>
@@ -1626,24 +1401,22 @@
                             <p class="product-desc">Будит вас хрюканьем ровно в 7:00. Снуз — повторное хрюканье через 5 минут.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽299 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 2')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свино-Будильник «ХрюТайм»', 299999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 3 -->
                     <div class="product-card">
                         <div class="product-card-badge">ХИТ</div>
                         <div class="product-image">🐖</div>
                         <div class="product-info">
                             <div class="product-name">Свинья-Навигатор «ХрюGPS»</div>
-                            <p class="product-desc">Показывает дорогу хрюканьем. Поворот налево — хрю. Направо — два хрю.</p>
+                            <p class="product-desc">Показывает дорогу хрюканьем. Налево — хрю. Направо — два хрю.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽249 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 3')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья-Навигатор «ХрюGPS»', 249999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 4 -->
                     <div class="product-card">
                         <div class="product-card-badge">🔥 АКЦИЯ</div>
                         <div class="product-image">🐷</div>
@@ -1652,11 +1425,10 @@
                             <p class="product-desc">Варит кофе копытцами. Молоко взбивает пятачком до идеальной пенки.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽179 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 4')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свино-Кофеварка «Хрюппучино»', 179999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 5 -->
                     <div class="product-card">
                         <div class="product-card-badge">ЛЮКС</div>
                         <div class="product-image">🐽</div>
@@ -1665,24 +1437,22 @@
                             <p class="product-desc">Экран в форме пятачка. 8K разрешение. Только свинные каналы.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽399 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 5')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свино-Телевизор «ХрюVision»', 399999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 6 -->
                     <div class="product-card">
                         <div class="product-card-badge">NEW</div>
                         <div class="product-image">🐖</div>
                         <div class="product-info">
                             <div class="product-name">Свинья-Зонт «Хрюмбрелла»</div>
-                            <p class="product-desc">Раскрывается при первых каплях. Ушки — это ручка. Хвостик — антенна Wi-Fi.</p>
+                            <p class="product-desc">Раскрывается при первых каплях. Ушки — ручка. Хвостик — антенна Wi-Fi.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽229 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 6')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья-Зонт «Хрюмбрелла»', 229999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 7 -->
                     <div class="product-card">
                         <div class="product-card-badge">VIP</div>
                         <div class="product-image">🐷</div>
@@ -1691,24 +1461,22 @@
                             <p class="product-desc">Басы такие глубокие, что соседи думают — землетрясение. А это хрюканье!</p>
                             <div class="product-footer">
                                 <div class="product-price">₽349 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 7')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья-Колонка «ХрюBass»', 349999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 8 -->
                     <div class="product-card">
                         <div class="product-card-badge">ХИТ</div>
                         <div class="product-image">🐽</div>
                         <div class="product-info">
                             <div class="product-name">Свино-Подушка «ХрюСон»</div>
-                            <p class="product-desc">Мурлычет... то есть хрюкает колыбельную. Встроенный массаж копытцами.</p>
+                            <p class="product-desc">Хрюкает колыбельную. Встроенный массаж копытцами. Сладкие хрю-сны.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽189 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 8')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свино-Подушка «ХрюСон»', 189999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 9 -->
                     <div class="product-card">
                         <div class="product-card-badge">🔥 АКЦИЯ</div>
                         <div class="product-image">🐖</div>
@@ -1717,11 +1485,10 @@
                             <p class="product-desc">Пишет розовыми чернилами. Каждая точка — маленький пятачок.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽159 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 9')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свино-Ручка «ХрюПисака»', 159999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 10 -->
                     <div class="product-card">
                         <div class="product-card-badge">ЛЮКС</div>
                         <div class="product-image">🐷</div>
@@ -1730,11 +1497,10 @@
                             <p class="product-desc">Розовый свет для романтики. Хрюкает при включении. Копытца — абажуры.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽449 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 10')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья-Люстра «ХрюСвет»', 449999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 11 -->
                     <div class="product-card">
                         <div class="product-card-badge">NEW</div>
                         <div class="product-image">🐽</div>
@@ -1743,24 +1509,22 @@
                             <p class="product-desc">Хрюкают при каждом шаге. Копытца — подошва. Массаж стоп включён.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽279 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 11')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свино-Тапки «ХрюШаг»', 279999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 12 -->
                     <div class="product-card">
                         <div class="product-card-badge">VIP</div>
                         <div class="product-image">🐖</div>
                         <div class="product-info">
                             <div class="product-name">Свинья-Часы «ХрюТик»</div>
-                            <p class="product-desc">Вместо тиканья — микро-хрюканье. Стрелки в форме копытец. Ремешок из ушек.</p>
+                            <p class="product-desc">Вместо тиканья — микро-хрюканье. Стрелки в форме копытец.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽379 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 12')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья-Часы «ХрюТик»', 379999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 13 -->
                     <div class="product-card">
                         <div class="product-card-badge">ХИТ</div>
                         <div class="product-image">🐷</div>
@@ -1769,11 +1533,10 @@
                             <p class="product-desc">Сушит волосы тёплым хрюканьем. Три режима: хрю, хрю-хрю и ХРЮЮ!</p>
                             <div class="product-footer">
                                 <div class="product-price">₽219 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 13')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свино-Фен «ХрюВетер»', 219999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 14 -->
                     <div class="product-card">
                         <div class="product-card-badge">🔥 АКЦИЯ</div>
                         <div class="product-image">🐽</div>
@@ -1782,11 +1545,10 @@
                             <p class="product-desc">Считает в хрю-единицах. 2+2=ХРЮ. Научно доказано — точнее обычного!</p>
                             <div class="product-footer">
                                 <div class="product-price">₽169 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 14')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья-Калькулятор «ХрюМатика»', 169999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 15 -->
                     <div class="product-card">
                         <div class="product-card-badge">ЛЮКС</div>
                         <div class="product-image">🐖</div>
@@ -1795,11 +1557,10 @@
                             <p class="product-desc">Хрюкает, когда цветам нужна вода. Копытца — подставка. Элита интерьера.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽499 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 15')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья-Ваза «ХрюФлора»', 499999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 16 -->
                     <div class="product-card">
                         <div class="product-card-badge">NEW</div>
                         <div class="product-image">🐷</div>
@@ -1808,11 +1569,10 @@
                             <p class="product-desc">Шумоподавление через хрюканье. ANC нового поколения — Active Noise Chrü.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽239 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 16')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свино-Наушники «ХрюБит»', 239999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 17 -->
                     <div class="product-card">
                         <div class="product-card-badge">VIP</div>
                         <div class="product-image">🐽</div>
@@ -1821,11 +1581,10 @@
                             <p class="product-desc">Хрюкает при перегрузе. Копытца-замки. Встроенный GPS-пятачок.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽329 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 17')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья-Рюкзак «ХрюПак»', 329999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 18 -->
                     <div class="product-card">
                         <div class="product-card-badge">ХИТ</div>
                         <div class="product-image">🐖</div>
@@ -1834,11 +1593,10 @@
                             <p class="product-desc">Машет ушками и создаёт приятный ветерок с ароматом трюфелей.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽199 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 18')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свино-Веер «ХрюБриз»', 199999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 19 -->
                     <div class="product-card">
                         <div class="product-card-badge">🔥 АКЦИЯ</div>
                         <div class="product-image">🐷</div>
@@ -1847,11 +1605,10 @@
                             <p class="product-desc">Хрюкает «спасибо» за каждую монетку. При наполнении танцует джигу.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽149 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 19')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свинья-Копилка «ХрюБанк»', 149999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 20 -->
                     <div class="product-card">
                         <div class="product-card-badge">ЛЮКС</div>
                         <div class="product-image">🐽</div>
@@ -1860,13 +1617,11 @@
                             <p class="product-desc">ИИ на базе хрюканья. Отвечает на все вопросы. Иногда правильно.</p>
                             <div class="product-footer">
                                 <div class="product-price">₽549 999 <small>/шт</small></div>
-                                <button class="product-btn" onclick="addToCart(event, 'Свинья 20')">В хлев 🛒</button>
+                                <button class="product-btn" onclick="addToCart(event, 'Свино-Робот «ХрюТрон 3000»', 549999)">В хлев 🛒</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Пагинация -->
                 <div class="pagination-controls" id="paginationControls">
                     <button class="pagination-btn" id="prevPageBtn" onclick="changePage(-1)">◀</button>
                     <div id="paginationPages" style="display: flex; gap: 0.5rem;"></div>
@@ -1875,23 +1630,18 @@
             </div>
         </div>
     </section>
-
     <!-- TESTIMONIALS -->
     <section class="section testimonials" id="reviews">
         <div class="section-inner">
             <div class="section-header reveal">
                 <div class="section-tag">Отзывы</div>
                 <h2 class="section-title" style="color:white;">Что говорят наши клиенты</h2>
-                <p class="section-desc">
-                    Реальные отзывы реальных людей (и нескольких свиней)
-                </p>
+                <p class="section-desc">Реальные отзывы реальных людей (и нескольких свиней)</p>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card reveal">
                     <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">
-                        «Купил Свинобульдозер для дачи. Теперь соседи молча смотрят, как розовый гибрид перепахивает мой участок за 8 минут. Свинное восхищение в их глазах бесценно.»
-                    </p>
+                    <p class="testimonial-text">«Купил Свинобульдозер для дачи. Теперь соседи молча смотрят, как розовый гибрид перепахивает мой участок за 8 минут. Свинное восхищение в их глазах бесценно.»</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">👨‍🌾</div>
                         <div>
@@ -1902,9 +1652,7 @@
                 </div>
                 <div class="testimonial-card reveal">
                     <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">
-                        «Свинное облако — это лучшее, что случилось с нашим посёлком. Теперь мы знаем о дожде за 3 дня. Правда, оно иногда хрюкает в 3 часа ночи, но мы привыкли.»
-                    </p>
+                    <p class="testimonial-text">«Свинное облако — это лучшее, что случилось с нашим посёлком. Теперь мы знаем о дожде за 3 дня. Правда, оно иногда хрюкает в 3 часа ночи, но мы привыкли.»</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">👩‍💼</div>
                         <div>
@@ -1915,9 +1663,7 @@
                 </div>
                 <div class="testimonial-card reveal">
                     <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">
-                        «Хрю. Хрю хрю хрю. Хрю-хрю! Хрюююю. 🐽»
-                    </p>
+                    <p class="testimonial-text">«Хрю. Хрю хрю хрю. Хрю-хрю! Хрюююю. 🐽»</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">🐷</div>
                         <div>
@@ -1929,16 +1675,13 @@
             </div>
         </div>
     </section>
-
     <!-- CONTACT -->
     <section class="section contact" id="contact">
         <div class="section-inner">
             <div class="section-header reveal">
                 <div class="section-tag">Контакты</div>
                 <h2 class="section-title">Свяжитесь с нами</h2>
-                <p class="section-desc">
-                    Мы всегда рады новым клиентам (и новым свиньям)
-                </p>
+                <p class="section-desc">Мы всегда рады новым клиентам (и новым свиньям)</p>
             </div>
             <div class="contact-grid">
                 <div class="reveal">
@@ -1946,46 +1689,41 @@
                         <div class="contact-icon">📍</div>
                         <div>
                             <div class="contact-info-title">Свинное расположение</div>
-                            <div class="contact-info-text">
-                                г. Хрюнбург, ул. Пятачковая, д. 42, стр. ХРЮ<br>
-                                (третий хлев направо после свинного фонтана)
-                            </div>
+                            <div class="contact-info-text">г. Хрюнбург, ул. Пятачковая, д. 42, стр. ХРЮ<br>(третий хлев направо после свинного фонтана)</div>
                         </div>
                     </div>
                     <div class="contact-info-card">
                         <div class="contact-icon">🕐</div>
                         <div>
                             <div class="contact-info-title">Свинные часы работы</div>
-                            <div class="contact-info-text">
-                                Пн-Пт: 8:00 — 20:00 (по хрюнбургскому времени)<br>
-                                Сб: 10:00 — 18:00 (свинный уикенд)<br>
-                                Вс: Свиньи отдыхают. И мы с ними.
-                            </div>
+                            <div class="contact-info-text">Пн-Пт: 8:00 — 20:00 (по хрюнбургскому времени)<br>Сб: 10:00 — 18:00 (свинный уикенд)<br>Вс: Свиньи отдыхают. И мы с ними.</div>
                         </div>
                     </div>
                     <div class="contact-info-card">
                         <div class="contact-icon">📞</div>
                         <div>
                             <div class="contact-info-title">Свинная линия</div>
-                            <div class="contact-info-text">
-                                +7 (999) ХРЮ-ХРЮ-ХРЮ<br>
-                                hru@svinnaya-utopia.oink
-                            </div>
+                            <div class="contact-info-text">+7 (999) ХРЮ-ХРЮ-ХРЮ<br>hru@svinnaya-utopia.oink</div>
                         </div>
                     </div>
                     <div class="contact-info-card">
                         <div class="contact-icon">🚗</div>
                         <div>
                             <div class="contact-info-title">Как добраться</div>
-                            <div class="contact-info-text">
-                                Метро «Свинная площадь», выход к копытам.<br>
-                                Автобус №ХРЮ, остановка «Свинное величие».
-                            </div>
+                            <div class="contact-info-text">Метро «Свинная площадь», выход к копытам.<br>Автобус №ХРЮ, остановка «Свинное величие».</div>
                         </div>
                     </div>
                 </div>
                 <div class="contact-form reveal">
-                    <h3 style="font-size:1.4rem; margin-bottom:1.5rem;">Заказать свинью мечты</h3>
+                    <h3 style="font-size:1.4rem; margin-bottom:1.5rem;">🐷 Оформить заказ</h3>
+                    
+                    <!-- CART DISPLAY -->
+                    <div class="cart-section" id="cartSection">
+                        <div class="cart-section-title">🛒 Ваш хлев (корзина)</div>
+                        <div id="cartItems">
+                            <div class="cart-empty-msg">Корзина пуста. Добавьте свиней из ассортимента выше! 🐽</div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Ваше имя (или кличка)</label>
                         <input type="text" placeholder="Например: Барон фон Хрюнштейн" id="formName">
@@ -1993,19 +1731,6 @@
                     <div class="form-group">
                         <label>Свинная почта</label>
                         <input type="email" placeholder="hru@example.oink" id="formEmail">
-                    </div>
-                    <div class="form-group">
-                        <label>Какую свинью желаете?</label>
-                        <select id="formPig">
-                            <option value="">Выберите свинью...</option>
-                            <option value="bulldozer">🚜 Свинобульдозер™</option>
-                            <option value="table">🪑 Свиной стол «Хрю-комфорт»</option>
-                            <option value="cloud">☁️ Свинное облако</option>
-                            <option value="guitar">🎸 Свинная гитара</option>
-                            <option value="microscope">🔬 Свинный микроскоп</option>
-                            <option value="throne">👑 Свинный трон</option>
-                            <option value="custom">🧬 Хочу кастомную свинью!</option>
-                        </select>
                     </div>
                     <div class="form-group">
                         <label>Дополнительные хрюканья</label>
@@ -2018,7 +1743,6 @@
             </div>
         </div>
     </section>
-
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-inner">
@@ -2035,93 +1759,189 @@
             </div>
         </div>
     </footer>
-
     <!-- TOAST -->
     <div class="toast" id="toast"></div>
-
-    <!-- SCROLL TO TOP BUTTON -->
+    <!-- SCROLL TO TOP -->
     <button id="scrollToTop" class="scroll-to-top" aria-label="Вернуться наверх">↑</button>
-
-    <!-- EmailJS Script -->
+    <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <script>
         // Initialize EmailJS
-        (function() {
-            emailjs.init("xoA__keCpXScVL5Kn");
-        })();
-
-        // === NAVBAR SCROLL ===
+        (function() { emailjs.init("xoA__keCpXScVL5Kn"); })();
+        // ========================
+        // CART SYSTEM
+        // ========================
+        let cart = JSON.parse(localStorage.getItem('pigCart') || '[]');
+        function saveCart() {
+            localStorage.setItem('pigCart', JSON.stringify(cart));
+        }
+        function addToCart(event, name, price) {
+            // Check if already in cart
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            saveCart();
+            renderCart();
+            updateCartBadge();
+            showToast(`🐷 "${name}" добавлен в хлев! Хрю!`);
+            // Particle effect
+            const card = event.target.closest('.product-card');
+            if (card) {
+                const emojis = ['💖', '🐽'];
+                for (let i = 0; i < 8; i++) {
+                    const el = document.createElement('div');
+                    el.textContent = emojis[Math.floor(Math.random() * 2)];
+                    el.style.cssText = `position:absolute;left:${Math.random()*80+10}%;top:${Math.random()*80+10}%;font-size:2rem;animation:heartFloat 2s ease-out forwards;pointer-events:none;z-index:10;`;
+                    card.appendChild(el);
+                    setTimeout(() => el.remove(), 2000);
+                }
+            }
+        }
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+            updateCartBadge();
+        }
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            saveCart();
+            renderCart();
+            updateCartBadge();
+        }
+        function clearCart() {
+            cart = [];
+            saveCart();
+            renderCart();
+            updateCartBadge();
+        }
+        function getCartTotal() {
+            return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        }
+        function getCartCount() {
+            return cart.reduce((sum, item) => sum + item.qty, 0);
+        }
+        function formatPrice(num) {
+            return '₽' + num.toLocaleString('ru-RU');
+        }
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            if (!container) return;
+            if (cart.length === 0) {
+                container.innerHTML = '<div class="cart-empty-msg">Корзина пуста. Добавьте свиней из ассортимента выше! 🐽</div>';
+                return;
+            }
+            let html = '';
+            cart.forEach((item, i) => {
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-name" title="${item.name}">${item.name}</div>
+                        <div class="cart-item-price">${formatPrice(item.price)}</div>
+                        <div class="cart-qty-controls">
+                            <button class="cart-qty-btn" onclick="changeQty(${i}, -1)">−</button>
+                            <span class="cart-qty-num">${item.qty}</span>
+                            <button class="cart-qty-btn" onclick="changeQty(${i}, 1)">+</button>
+                        </div>
+                        <button class="cart-remove-btn" onclick="removeFromCart(${i})" title="Удалить">✕</button>
+                    </div>
+                `;
+            });
+            html += `
+                <div class="cart-total">
+                    <span class="cart-total-label">Итого (${getCartCount()} шт.):</span>
+                    <span class="cart-total-sum">${formatPrice(getCartTotal())}</span>
+                </div>
+                <button class="cart-clear-btn" onclick="clearCart()">🗑️ Очистить корзину</button>
+            `;
+            container.innerHTML = html;
+        }
+        function updateCartBadge() {
+            const count = getCartCount();
+            const badge = document.getElementById('navCartBadge');
+            const mobileCount = document.getElementById('mobileCartCount');
+            
+            if (badge) {
+                badge.textContent = count;
+                badge.classList.toggle('empty', count === 0);
+                // Pulse animation
+                badge.classList.remove('pulse');
+                void badge.offsetWidth; // reflow
+                badge.classList.add('pulse');
+            }
+            if (mobileCount) {
+                mobileCount.textContent = count;
+            }
+        }
+        function getCartSummaryText() {
+            if (cart.length === 0) return 'Корзина пуста';
+            let lines = cart.map(item => `• ${item.name} × ${item.qty} шт. = ${formatPrice(item.price * item.qty)}`);
+            lines.push(`\nИТОГО: ${formatPrice(getCartTotal())} (${getCartCount()} шт.)`);
+            return lines.join('\n');
+        }
+        // ========================
+        // NAVBAR
+        // ========================
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
-
-        // === BURGER MENU ===
+        // ========================
+        // BURGER MENU
+        // ========================
         const burger = document.getElementById('burger');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileClose = document.getElementById('mobileClose');
         const mobileLinks = document.querySelectorAll('.mobile-link');
-
         burger.addEventListener('click', () => {
             burger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
         });
-
         mobileClose.addEventListener('click', () => {
             burger.classList.remove('active');
             mobileMenu.classList.remove('active');
         });
-
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 burger.classList.remove('active');
                 mobileMenu.classList.remove('active');
             });
         });
-
-        // === SCROLL REVEAL ===
+        // ========================
+        // SCROLL REVEAL
+        // ========================
         const revealElements = document.querySelectorAll('.reveal');
-
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
+                    setTimeout(() => { entry.target.classList.add('visible'); }, index * 100);
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         revealElements.forEach(el => revealObserver.observe(el));
-
-        // === COUNTER ANIMATION ===
+        // ========================
+        // COUNTER
+        // ========================
         function animateCounter(id, target, duration = 2000) {
             const el = document.getElementById(id);
             const startTime = performance.now();
-
             function update(currentTime) {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const eased = 1 - Math.pow(1 - progress, 3);
-                const current = Math.floor(eased * target);
-
-                el.textContent = current.toLocaleString('ru-RU');
-
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                } else {
-                    el.textContent = target.toLocaleString('ru-RU') + '+';
-                }
+                el.textContent = Math.floor(eased * target).toLocaleString('ru-RU');
+                if (progress < 1) requestAnimationFrame(update);
+                else el.textContent = target.toLocaleString('ru-RU') + '+';
             }
-
             requestAnimationFrame(update);
         }
-
         const heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2131,10 +1951,10 @@
                 }
             });
         }, { threshold: 0.5 });
-
         heroObserver.observe(document.querySelector('.hero-stats'));
-
-        // === TOAST ===
+        // ========================
+        // TOAST
+        // ========================
         function showToast(message, type = 'info') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
@@ -2142,67 +1962,44 @@
             toast.classList.add('show', type);
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
-
-        // === ADD TO CART ===
-        function addToCart(event, product) {
-            showToast(`🐷 "${product}" добавлен в хлев! Хрю!`);
-
-            const card = event.target.closest('.product-card');
-            const emojis = ['💖', '🐽'];
-            for (let i = 0; i < 8; i++) {
-                const element = document.createElement('div');
-                element.textContent = emojis[Math.floor(Math.random() * 2)];
-                element.style.position = 'absolute';
-                element.style.left = Math.random() * 80 + 10 + '%';
-                element.style.top = Math.random() * 80 + 10 + '%';
-                element.style.fontSize = '2rem';
-                element.style.animation = 'heartFloat 2s ease-out forwards';
-                element.style.pointerEvents = 'none';
-                element.style.zIndex = '10';
-                card.appendChild(element);
-                setTimeout(() => element.remove(), 2000);
-            }
-        }
-
-        // === FORM SUBMIT ===
+        // ========================
+        // FORM SUBMIT
+        // ========================
         async function submitForm() {
             const name = document.getElementById('formName').value.trim();
             const email = document.getElementById('formEmail').value.trim();
-            const pig = document.getElementById('formPig').value;
             const message = document.getElementById('formMessage').value.trim();
-
             if (!name || !email) {
                 showToast('🐽 Заполните имя и свинную почту!', 'error');
                 return;
             }
-
             if (!validateEmail(email)) {
                 showToast('📧 Введите корректный email адрес!', 'error');
                 return;
             }
-
+            if (cart.length === 0) {
+                showToast('🛒 Добавьте хотя бы одну свинью в корзину!', 'error');
+                return;
+            }
             const submitBtn = document.querySelector('.form-submit');
             const originalText = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = '🐷 Отправляем заявку...';
-
             try {
                 const templateParams = {
                     name: name,
                     email: email,
-                    pig: getProductName(pig),
+                    pig: getCartSummaryText(),
                     message: message || 'Без дополнительных пожеланий',
                     date: new Date().toLocaleString('ru-RU')
                 };
-
                 const response = await emailjs.send('service_1rgsfgb', 'template_futc0ih', templateParams);
-
                 if (response.status === 200 || response.text === 'OK') {
                     showToast(`🎉 Спасибо, ${name}! Ваша заявка успешно отправлена! 🐽`, 'success');
                     document.getElementById('formName').value = '';
                     document.getElementById('formEmail').value = '';
-                    document.getElementById('formPig').value = '';
                     document.getElementById('formMessage').value = '';
+                    clearCart();
                 } else {
                     throw new Error(`EmailJS response: ${response.status} - ${response.text}`);
                 }
@@ -2214,38 +2011,24 @@
                 submitBtn.textContent = originalText;
             }
         }
-
-        function getProductName(value) {
-            const products = {
-                'bulldozer': '🚜 Свинобульдозер™',
-                'table': '🪑 Свиной стол «Хрю-комфорт»',
-                'cloud': '☁️ Свинное облако',
-                'guitar': '🎸 Свинная гитара',
-                'microscope': '🔬 Свинный микроскоп',
-                'throne': '👑 Свинный трон',
-                'custom': '🧬 Кастомная свинья'
-            };
-            return products[value] || 'Не указано';
-        }
-
         function validateEmail(email) {
-            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(email);
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }
-
-        // === PARALLAX SHAPES ===
+        // ========================
+        // PARALLAX
+        // ========================
         document.addEventListener('mousemove', (e) => {
             const shapes = document.querySelectorAll('.floating-shape');
             const x = (e.clientX / window.innerWidth - 0.5) * 2;
             const y = (e.clientY / window.innerHeight - 0.5) * 2;
-
             shapes.forEach((shape, i) => {
                 const speed = (i + 1) * 8;
                 shape.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
             });
         });
-
-        // === SCROLL TO TOP ===
+        // ========================
+        // SCROLL TO TOP
+        // ========================
         const scrollToTopBtn = document.getElementById('scrollToTop');
         window.addEventListener('scroll', () => {
             scrollToTopBtn.classList.toggle('show', window.scrollY > window.innerHeight);
@@ -2253,122 +2036,81 @@
         scrollToTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-
-        // === IMAGE SLIDER ===
+        // ========================
+        // IMAGE SLIDER
+        // ========================
         function nextImage(sliderId) {
             const slider = document.getElementById(sliderId);
             const images = slider.querySelectorAll('.slider-image');
-            let activeIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
-            images[activeIndex].classList.remove('active');
-            activeIndex = (activeIndex + 1) % images.length;
-            images[activeIndex].classList.add('active');
+            let idx = Array.from(images).findIndex(img => img.classList.contains('active'));
+            images[idx].classList.remove('active');
+            images[(idx + 1) % images.length].classList.add('active');
         }
-
         function prevImage(sliderId) {
             const slider = document.getElementById(sliderId);
             const images = slider.querySelectorAll('.slider-image');
-            let activeIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
-            images[activeIndex].classList.remove('active');
-            activeIndex = (activeIndex - 1 + images.length) % images.length;
-            images[activeIndex].classList.add('active');
+            let idx = Array.from(images).findIndex(img => img.classList.contains('active'));
+            images[idx].classList.remove('active');
+            images[(idx - 1 + images.length) % images.length].classList.add('active');
         }
-
-        // === PRODUCTS SLIDER (first) ===
+        // ========================
+        // PRODUCT SLIDERS
+        // ========================
         function toggleProductsSlider() {
             const slider = document.getElementById('productsSlider');
             const icon = document.getElementById('triggerIcon');
-            
             slider.classList.toggle('open');
-            
             if (slider.classList.contains('open')) {
                 icon.textContent = '▲';
-                icon.style.transform = 'rotate(180deg)';
-                localStorage.setItem('productsSliderOpen', 'true');
             } else {
                 icon.textContent = '▼';
-                icon.style.transform = 'rotate(0deg)';
-                localStorage.setItem('productsSliderOpen', 'false');
             }
         }
-
-        // === POTENTIAL PRODUCTS SLIDER (second) ===
         function togglePotentialProductsSlider() {
             const slider = document.getElementById('potentialProductsSlider');
             const icon = document.getElementById('potentialTriggerIcon');
-            
             slider.classList.toggle('open');
-            
             if (slider.classList.contains('open')) {
                 icon.textContent = '▲';
-                icon.style.transform = 'rotate(180deg)';
-                localStorage.setItem('potentialProductsSliderOpen', 'true');
                 initPagination();
             } else {
                 icon.textContent = '▼';
-                icon.style.transform = 'rotate(0deg)';
-                localStorage.setItem('potentialProductsSliderOpen', 'false');
             }
         }
-
-        // === PAGINATION ===
+        // ========================
+        // PAGINATION
+        // ========================
         let currentPage = 1;
         const ITEMS_PER_PAGE = 6;
         let allPotentialCards = [];
-
         function initPagination() {
             const grid = document.getElementById('potentialGrid');
             allPotentialCards = Array.from(grid.querySelectorAll('.product-card'));
-            
-            // Load saved page
-            const savedPage = localStorage.getItem('potentialProductsCurrentPage');
-            currentPage = savedPage ? parseInt(savedPage) : 1;
-            
             const totalPages = Math.ceil(allPotentialCards.length / ITEMS_PER_PAGE);
             if (currentPage > totalPages) currentPage = 1;
-            
             showPage(currentPage);
         }
-
         function showPage(page) {
             const totalPages = Math.ceil(allPotentialCards.length / ITEMS_PER_PAGE);
             currentPage = Math.max(1, Math.min(page, totalPages));
-            
-            localStorage.setItem('potentialProductsCurrentPage', currentPage.toString());
-            
-            // Hide all cards
             allPotentialCards.forEach(card => {
                 card.style.display = 'none';
                 card.classList.remove('visible');
             });
-            
-            // Show cards for current page
-            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-            const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, allPotentialCards.length);
-            
-            for (let i = startIndex; i < endIndex; i++) {
-                const card = allPotentialCards[i];
-                card.style.display = 'block';
-                setTimeout(() => {
-                    card.classList.add('visible');
-                }, (i - startIndex) * 80);
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+            const end = Math.min(start + ITEMS_PER_PAGE, allPotentialCards.length);
+            for (let i = start; i < end; i++) {
+                allPotentialCards[i].style.display = 'block';
+                setTimeout(() => { allPotentialCards[i].classList.add('visible'); }, (i - start) * 80);
             }
-            
-            // Update buttons
             document.getElementById('prevPageBtn').disabled = currentPage === 1;
             document.getElementById('nextPageBtn').disabled = currentPage === totalPages;
-            
-            // Build page number buttons
             buildPageButtons(totalPages);
         }
-
-        function changePage(direction) {
-            showPage(currentPage + direction);
-        }
-
+        function changePage(dir) { showPage(currentPage + dir); }
         function buildPageButtons(totalPages) {
             const container = document.getElementById('paginationPages');
             container.innerHTML = '';
-            
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.createElement('button');
                 btn.className = 'pagination-btn' + (i === currentPage ? ' active-page' : '');
@@ -2377,29 +2119,16 @@
                 container.appendChild(btn);
             }
         }
-
-        // === INIT ON LOAD ===
+        // ========================
+        // INIT
+        // ========================
         window.addEventListener('DOMContentLoaded', () => {
-            // First slider
-            const savedState = localStorage.getItem('productsSliderOpen');
-            if (savedState === 'true') {
-                const slider = document.getElementById('productsSlider');
-                const icon = document.getElementById('triggerIcon');
-                slider.classList.add('open');
-                icon.textContent = '▲';
-                icon.style.transform = 'rotate(180deg)';
-            }
-
-            // Second slider
-            const savedPotentialState = localStorage.getItem('potentialProductsSliderOpen');
-            if (savedPotentialState === 'true') {
-                const potentialSlider = document.getElementById('potentialProductsSlider');
-                const potentialIcon = document.getElementById('potentialTriggerIcon');
-                potentialSlider.classList.add('open');
-                potentialIcon.textContent = '▲';
-                potentialIcon.style.transform = 'rotate(180deg)';
-                initPagination();
-            }
+            // Both sliders are open by default (set in HTML)
+            // Init pagination for the second slider since it's open
+            initPagination();
+            // Render cart from localStorage
+            renderCart();
+            updateCartBadge();
         });
     </script>
 </body>
