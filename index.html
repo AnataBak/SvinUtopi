@@ -1430,7 +1430,15 @@
     <!-- SCROLL TO TOP BUTTON -->
     <button id="scrollToTop" class="scroll-to-top" aria-label="Вернуться наверх">↑</button>
 
+    <!-- EmailJS Script -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
     <script>
+        // Initialize EmailJS with your public key
+        (function() {
+            emailjs.init("xoA__keCpXScVL5Kn");
+        })();
+
         // === NAVBAR SCROLL ===
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
@@ -1516,10 +1524,11 @@
         heroObserver.observe(document.querySelector('.hero-stats'));
 
         // === TOAST ===
-        function showToast(message) {
+        function showToast(message, type = 'info') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
-            toast.classList.add('show');
+            toast.classList.remove('show', 'success', 'error');
+            toast.classList.add('show', type);
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
@@ -1546,22 +1555,85 @@
         }
 
         // === FORM SUBMIT ===
-        function submitForm() {
-            const name = document.getElementById('formName').value;
-            const email = document.getElementById('formEmail').value;
+        async function submitForm() {
+            const name = document.getElementById('formName').value.trim();
+            const email = document.getElementById('formEmail').value.trim();
             const pig = document.getElementById('formPig').value;
+            const message = document.getElementById('formMessage').value.trim();
 
+            // Validation
             if (!name || !email) {
-                showToast('🐽 Заполните имя и свинную почту!');
+                showToast('🐽 Заполните имя и свинную почту!', 'error');
                 return;
             }
 
-            showToast(`🎉 Спасибо, ${name}! Ваша свинья уже хрюкает от радости!`);
+            if (!validateEmail(email)) {
+                showToast('📧 Введите корректный email адрес!', 'error');
+                return;
+            }
 
-            document.getElementById('formName').value = '';
-            document.getElementById('formEmail').value = '';
-            document.getElementById('formPig').value = '';
-            document.getElementById('formMessage').value = '';
+            // Disable submit button to prevent double submission
+            const submitBtn = document.querySelector('.form-submit');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = '🐷 Отправляем заявку...';
+
+            try {
+                // Prepare email data
+                const templateParams = {
+                    name: name,
+                    email: email,
+                    pig: getProductName(pig),
+                    message: message || 'Без дополнительных пожеланий',
+                    date: new Date().toLocaleString('ru-RU')
+                };
+
+                // Send email via EmailJS
+                const response = await emailjs.send(
+                    'service_1rgsfgb',  // Service ID
+                    'template_ds06fr2', // Template ID
+                    templateParams
+                );
+
+                if (response.status === 200) {
+                    showToast(`🎉 Спасибо, ${name}! Ваша заявка успешно отправлена! 🐽`, 'success');
+                    
+                    // Reset form
+                    document.getElementById('formName').value = '';
+                    document.getElementById('formEmail').value = '';
+                    document.getElementById('formPig').value = '';
+                    document.getElementById('formMessage').value = '';
+                } else {
+                    throw new Error('EmailJS response error');
+                }
+            } catch (error) {
+                console.error('Error sending email:', error);
+                showToast('❌ Ошибка отправки заявки. Попробуйте позже!', 'error');
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        }
+
+        // Helper function to get product name
+        function getProductName(value) {
+            const products = {
+                'bulldozer': '🚜 Свинобульдозер™',
+                'table': '🪑 Свинный стол «Хрю-комфорт»',
+                'cloud': '☁️ Свинное облако',
+                'guitar': '🎸 Свинная гитара',
+                'microscope': '🔬 Свинный микроскоп',
+                'throne': '👑 Свинный трон',
+                'custom': '🧬 Кастомная свинья'
+            };
+            return products[value] || 'Не указано';
+        }
+
+        // Email validation helper
+        function validateEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
         }
 
         // === PARALLAX SHAPES ===
