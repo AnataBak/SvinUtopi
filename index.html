@@ -1682,23 +1682,3 @@
     </script>
 </body>
 </html>
-            });
-        });
-
-        // === SCROLL TO TOP ===
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        function toggleScrollToTop() {
-            if (window.scrollY > 300) {  // Изменено для мобильных устройств
-                scrollToTopBtn.classList.add('show');
-            } else {
-                scrollToTopBtn.classList.remove('show');
-            }
-        }
-        window.addEventListener('scroll', toggleScrollToTop);
-        window.addEventListener('touchmove', toggleScrollToTop);  // Для мобильных устройств
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    </script>
-</body>
-</html>
