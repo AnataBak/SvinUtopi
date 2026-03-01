@@ -1120,7 +1120,7 @@
                 <!-- Product 2 -->
                 <div class="product-card reveal">
                     <div class="product-card-badge">NEW</div>
-                    <div class="product-image">🐷🪑</div>
+                    <div class="product-image"><img src="стол.png" alt="Свинный стол «Хрю-комфорт»"></div>
                     <div class="product-info">
                         <div class="product-name">Свинный стол «Хрю-комфорт»</div>
                         <p class="product-desc">
@@ -1509,6 +1509,24 @@
             shapes.forEach((shape, i) => {
                 const speed = (i + 1) * 8;
                 shape.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+
+        // === SCROLL TO TOP ===
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > window.innerHeight) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
             });
         });
 
