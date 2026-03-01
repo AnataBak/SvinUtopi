@@ -1591,11 +1591,11 @@
                 // Send email via EmailJS
                 const response = await emailjs.send(
                     'service_1rgsfgb',  // Service ID
-                    'template_ds06fr2', // Template ID
+                    'template_futc0ih', // Template ID
                     templateParams
                 );
 
-                if (response.status === 200) {
+                if (response.status === 200 || response.text === 'OK') {
                     showToast(`🎉 Спасибо, ${name}! Ваша заявка успешно отправлена! 🐽`, 'success');
                     
                     // Reset form
@@ -1604,11 +1604,11 @@
                     document.getElementById('formPig').value = '';
                     document.getElementById('formMessage').value = '';
                 } else {
-                    throw new Error('EmailJS response error');
+                    throw new Error(`EmailJS response: ${response.status} - ${response.text}`);
                 }
             } catch (error) {
                 console.error('Error sending email:', error);
-                showToast('❌ Ошибка отправки заявки. Попробуйте позже!', 'error');
+                showToast(`❌ Ошибка отправки: ${error.message || 'Проверьте настройки EmailJS'}`, 'error');
             } finally {
                 // Re-enable submit button
                 submitBtn.disabled = false;
