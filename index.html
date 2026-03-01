@@ -974,6 +974,63 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(194, 91, 106, 0.4);
         }
+
+        /* ===== IMAGE SLIDER ===== */
+        .image-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .slider-image.active {
+            opacity: 1;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            opacity: 0;
+        }
+
+        .slider-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 1;
+        }
+
+        .slider-btn.prev {
+            left: 0;
+        }
+
+        .slider-btn.next {
+            right: 0;
+        }
+
+        .slider-btn.prev {
+            left: 10px;
+        }
+
+        .slider-btn.next {
+            right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -1136,7 +1193,7 @@
                 <!-- Product 3 -->
                 <div class="product-card reveal">
                     <div class="product-card-badge">VIP</div>
-                    <div class="product-image">🐷☁️</div>
+                    <div class="product-image"><img src="облако.png" alt="Свинное облако"></div>
                     <div class="product-info">
                         <div class="product-name">Свинное облако</div>
                         <p class="product-desc">
@@ -1151,7 +1208,14 @@
 
                 <!-- Product 4 -->
                 <div class="product-card reveal">
-                    <div class="product-image">🐷🎸</div>
+                    <div class="product-image">
+                        <div class="image-slider" id="guitar-slider">
+                            <img src="гитара.png" alt="Свинная гитара «Пятачок Страдивари»" class="slider-image active">
+                            <img src="гитара2.png" alt="Свинная гитара «Пятачок Страдивари» - вид 2" class="slider-image">
+                            <button class="slider-btn prev" onclick="prevImage('guitar-slider')">‹</button>
+                            <button class="slider-btn next" onclick="nextImage('guitar-slider')">›</button>
+                        </div>
+                    </div>
                     <div class="product-info">
                         <div class="product-name">Свинная гитара «Пятачок Страдивари»</div>
                         <p class="product-desc">
@@ -1524,6 +1588,25 @@
         scrollToTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+
+        // === IMAGE SLIDER ===
+        function nextImage(sliderId) {
+            const slider = document.getElementById(sliderId);
+            const images = slider.querySelectorAll('.slider-image');
+            let activeIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+            images[activeIndex].classList.remove('active');
+            activeIndex = (activeIndex + 1) % images.length;
+            images[activeIndex].classList.add('active');
+        }
+
+        function prevImage(sliderId) {
+            const slider = document.getElementById(sliderId);
+            const images = slider.querySelectorAll('.slider-image');
+            let activeIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+            images[activeIndex].classList.remove('active');
+            activeIndex = (activeIndex - 1 + images.length) % images.length;
+            images[activeIndex].classList.add('active');
+        }
     </script>
 </body>
 </html>
