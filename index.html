@@ -933,6 +933,36 @@
             transform: translateY(0);
             opacity: 1;
         }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-dark), #E8657A);
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(194, 91, 106, 0.3);
+            z-index: 1000;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(194, 91, 106, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -1322,6 +1352,9 @@
     <!-- TOAST -->
     <div class="toast" id="toast"></div>
 
+    <!-- SCROLL TO TOP BUTTON -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Вернуться наверх">↑</button>
+
     <script>
         // === NAVBAR SCROLL ===
         const navbar = document.getElementById('navbar');
@@ -1466,6 +1499,19 @@
                 const speed = (i + 1) * 8;
                 shape.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
             });
+        });
+
+        // === SCROLL TO TOP ===
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > window.innerHeight) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 </body>
