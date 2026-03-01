@@ -1579,13 +1579,11 @@
             submitBtn.textContent = '🐷 Отправляем заявку...';
 
             try {
-                // Prepare email data
+                // Prepare email data - only send variables that exist in your template
                 const templateParams = {
                     name: name,
                     email: email,
-                    pig: getProductName(pig),
-                    message: message || 'Без дополнительных пожеланий',
-                    date: new Date().toLocaleString('ru-RU')
+                    message: message || 'Без дополнительных пожеланий'
                 };
 
                 // Send email via EmailJS
